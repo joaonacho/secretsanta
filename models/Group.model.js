@@ -1,14 +1,25 @@
 const { Schema, model } = require("mongoose");
 
 const groupSchema = new Schema({
-  groupname: {
+  admin: { type: Schema.Types.ObjectId, ref: "User" },
+  groupName: {
     type: String,
     unique: [true, "Don't be a party crasher! Make your own group."],
   },
-  friends: [{ type: Schema.Types.ObjectId, ref: "User" }],
-  groupImg: String,
+  description: String,
+  price: {
+    type: Number,
+    min: 0,
+  },
   comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
-  profilePic: [{ type: Schema.Types.ObjectId, ref: "User" }],
+  users: [{ type: Schema.Types.ObjectId, ref: "User" }],
+  groupImg: {
+    type: String,
+    default: "/images/group-avatar.jpg",
+  },
+  pairs: [{ type: Schema.Types.ObjectId, ref: "User" }],
+  //Bonus
+  mySecretSanta: { type: Schema.Types.ObjectId, ref: "User" },
 });
 
 const Group = model("Group", groupSchema);

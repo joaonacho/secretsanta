@@ -16,15 +16,19 @@ const userSchema = new Schema(
       lowercase: true,
       trim: true,
     },
-    comments: {
-      type: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
+    groups: {
+      type: [{ type: Schema.Types.ObjectId, ref: "Group" }],
     },
     password: {
       type: String,
       required: [true, "You forgot the password."],
     },
-    profileImg: String,
-    interests: String,
+    profileImg: {
+      type: String,
+      default:
+        "https://res.cloudinary.com/dxxmsbtrt/image/upload/v1645126731/SecretSanta/avatar-profile_ty1qpt.webp",
+    },
+    interests: [String],
   },
   {
     timestamps: true,
