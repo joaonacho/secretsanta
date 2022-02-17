@@ -9,10 +9,22 @@ const mongoose = require("mongoose");
 const isLoggedOut = require("../middleware/isLoggedOut");
 const isLoggedIn = require("../middleware/isLoggedIn");
 
-router.get("/profile/:id", (req, res, next) => {
-  const userId = req.body.id;
+//GET Create group
+router.get("/creategroup", (req, res) => {
+  res.render("group/creategroup");
+});
 
-  res.render("user/profilepage");
+//POST Create group
+router.post("/creategroup", (req, res, next) => {});
+
+//GET View group
+router.get("/group", (req, res) => {
+  res.render("group/group");
+});
+
+//GET Edit group
+router.get("/group/editgroup", (req, res) => {
+  res.render("group/editgroup");
 });
 
 module.exports = router;
