@@ -17,7 +17,21 @@ router.get("/creategroup", (req, res) => {
 
 //POST Create group
 router.post("/creategroup", (req, res, next) => {
-  const { groupName, description, price, users, groupImg } = req.body;
+  const { groupName, description, price, groupImg } = req.body;
+
+  Group.findOne({ groupName })
+    .then((newGroup) => {
+      if (!newGroup) {
+        Group.create({ groupName, description, price, groupImg }).then(
+          (createdGroup) => {
+            res.redirect("/group");
+          }
+        );
+      }
+    })
+    .catch((error) => {
+      next(error);
+    });
 });
 
 //GET View group
@@ -26,8 +40,50 @@ router.get("/group", (req, res) => {
 });
 
 //GET Edit group
-router.get("/editgroup", (req, res) => {
-  res.render("group/editgroup");
+router.get("/editgroup/:id", (req, res) => {
+  const { id } = req.params;
+
+  Group.findById(id).then((group) => {
+    res.render("group/editgroup", { group });
+  });
+});
+
+//POST Edit group
+router.post("/editgroup/:id", (req, res, next) => {
+  const { id } = req.params;
+  const { groupName, description, users, email, price, groupImg } = req.body;
+
+  Group.findByIdAndUpdate(
+    id,
+    {
+      groupName,
+      description,
+      users,
+      email,
+      price,
+      groupImg,
+    },
+    { new: true }
+  )
+    .then((updatedGroup) => {
+      res.redirect("group/group");
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
+
+//POST Delete group
+router.post("/group/:id/delete", (req, res, next) => {
+  const { id } = req.params;
+
+  Group.findByIdAndDelete(id)
+    .then(() => {
+      res.redirect("user/profilepage");
+    })
+    .catch((error) => {
+      next(error);
+    });
 });
 
 module.exports = router;

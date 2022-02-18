@@ -1,1 +1,75 @@
 <h1>Edit group page</h1>
+
+<form action="/group/{{_id}}editgroup" method="post">
+  <fieldset>
+    <label for="groupName">
+      Group name
+    </label>
+    <input
+      required
+      type="text"
+      id="groupName"
+      name="groupName"
+      value="{{groupName}}"
+    />
+  </fieldset>
+
+  <fieldset>
+    <label for="description">
+      Description
+    </label>
+    <textarea
+      name="description"
+      id="description"
+      cols="50"
+      rows="4"
+      value="{{description}}"
+    ></textarea>
+  </fieldset>
+
+  <fieldset>
+    <label for="users">
+      Insert your friends name here
+    </label>
+    <input required type="text" name="users" id="users" />
+    <label for="email">Email</label>
+    <input required type="email" name="email" id="email" />
+  </fieldset>
+
+  <fieldset>
+    <label for="users">
+      Insert your friends name here
+    </label>
+    <input required type="text" name="users" id="users" />
+    <label for="email">Email</label>
+    <input required type="email" name="email" id="email" />
+  </fieldset>
+
+  <fieldset>
+    <label for="price">
+      Gift price limit
+    </label>
+    <input
+      required
+      type="number"
+      id="price"
+      name="price"
+      min="1"
+      value="{{price}}"
+    />
+  </fieldset>
+
+  <fieldset>
+    <label for="groupImg">
+      Update image
+    </label>
+    <input type="file" id="groupImg" name="groupImg" />
+  </fieldset>
+
+  <button type="submit">Save changes</button>
+
+  <form action="/group/{{_id}}/delete" method="post">
+    <button>Delete group</button>
+  </form>
+
+</form>
