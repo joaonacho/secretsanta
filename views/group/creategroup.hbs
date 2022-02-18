@@ -1,1 +1,40 @@
 <h1>Create Group page</h1>
+
+<form action="/group/creategroup" method="post">
+  <fieldset>
+    <label for="groupName">
+      Group name
+      <input required type="text" name="groupName" />
+    </label>
+  </fieldset>
+
+  <fieldset>
+    <label for="description">
+      Description
+      <input type="text" name="description" />
+    </label>
+  </fieldset>
+
+  <fieldset>
+    <label for="price">
+      Gift limit price
+      <input required type="number" name="price" min="1" />
+    </label>
+  </fieldset>
+
+  <fieldset>
+    <label for="users">
+      Friends
+      <input required type="text" name="users" />
+    </label>
+  </fieldset>
+
+  <fieldset>
+    <label for="groupImg">
+      Upload a cover image
+      <input type="file" name="groupImg" />
+    </label>
+  </fieldset>
+
+  <button type="submit">Create group</button>
+</form>

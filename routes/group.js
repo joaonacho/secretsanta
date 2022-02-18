@@ -2,6 +2,7 @@ const router = require("express").Router();
 
 // Require the User model in order to interact with the database
 const User = require("../models/User.model");
+const Group = require("../models/Group.model");
 
 const mongoose = require("mongoose");
 
@@ -15,7 +16,9 @@ router.get("/creategroup", (req, res) => {
 });
 
 //POST Create group
-router.post("/creategroup", (req, res, next) => {});
+router.post("/creategroup", (req, res, next) => {
+  const { groupName, description, price, users, groupImg } = req.body;
+});
 
 //GET View group
 router.get("/group", (req, res) => {
@@ -23,7 +26,7 @@ router.get("/group", (req, res) => {
 });
 
 //GET Edit group
-router.get("/group/editgroup", (req, res) => {
+router.get("/editgroup", (req, res) => {
   res.render("group/editgroup");
 });
 
