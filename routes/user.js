@@ -19,7 +19,7 @@ router.get("/profile", isLoggedIn, (req, res, next) => {
 });
 
 //GET Edit profile
-router.get("/edit/:id", (req, res, next) => {
+router.get("/profile/edit/:id", (req, res, next) => {
   const { id } = req.params;
   User.findById(id).then((updateUser) => {
     //console.log(updateUser);
@@ -28,7 +28,7 @@ router.get("/edit/:id", (req, res, next) => {
 });
 
 //POST Edit profile
-router.post("/edit/:id", (req, res, next) => {
+router.post("/profile/edit/:id", (req, res, next) => {
   console.log("enter post edit");
   const { id } = req.params;
 
