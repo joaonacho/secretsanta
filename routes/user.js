@@ -9,10 +9,12 @@ const mongoose = require("mongoose");
 const isLoggedOut = require("../middleware/isLoggedOut");
 const isLoggedIn = require("../middleware/isLoggedIn");
 
-router.get("/profile/:id", (req, res, next) => {
-  const userId = req.body.id;
-
-  res.render("user/profilepage");
+router.get("/profile", isLoggedIn, (req, res, next) => {
+  // const userId = req.params;
+  // const {username, groups, interests, profileImg} =req.body;
+  // User.findById(userId).then((userFound) => {
+  res.render("user/profilepage", { user: req.session.user });
+  // })
 });
 
 module.exports = router;
