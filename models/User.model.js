@@ -28,7 +28,7 @@ const userSchema = new Schema(
       default:
         "https://res.cloudinary.com/dxxmsbtrt/image/upload/v1645126731/SecretSanta/avatar-profile_ty1qpt.webp",
     },
-    interests: [String],
+    interests: { type: String, default: "What" },
   },
   {
     timestamps: true,

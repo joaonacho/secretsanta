@@ -1,0 +1,39 @@
+<h1>olá Edita-me</h1>
+
+<form action="/user/edit/{{user._id}}" method="POST">
+
+  <fieldset>
+    <label for="username">
+      Username
+      <input
+        type="text"
+        name="username"
+        id="username"
+        value="{{user.username}}"
+      />
+    </label>
+  </fieldset>
+
+  <fieldset>
+    <label for="interests">
+      Interests
+    </label>
+    <textarea
+      name="interests"
+      id="interests"
+      cols="30"
+      rows="5"
+    >{{user.interests}}</textarea>
+  </fieldset>
+
+  <fieldset>
+    <label for="profileImg">Profile picture</label>
+    <input type="file" id="profileImg" name="profileImg" />
+  </fieldset>
+
+  <button type="submit">Save changes</button>
+</form>
+
+{{#if errorMessage}}
+  {{errorMessage}}
+{{/if}}

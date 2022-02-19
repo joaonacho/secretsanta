@@ -24,7 +24,7 @@ router.post("/creategroup", (req, res, next) => {
       if (!newGroup) {
         Group.create({ groupName, description, price, groupImg }).then(
           (createdGroup) => {
-            res.redirect("/group");
+            res.redirect("/group/group");
           }
         );
       }
