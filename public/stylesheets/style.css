@@ -5,11 +5,73 @@
   font-family: "Poppins", sans-serif;
 }
 body {
-  background: linear-gradient(to bottom, #d2e0f3, #e7eef8);
-  min-height: 100vh;
-  min-width: 100vw;
+  background: linear-gradient(to bottom, #cee3e9, #fbfbff);
+  max-height: 100vh;
+  max-width: 100vw;
 }
-section {
+nav {
+  max-width: 100vw;
+  background: #fffafb6e;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+#backgroundImage {
+  background: url("/images/pexels-helena-lopes-708440.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  transform: rotateY(180deg);
+}
+#sectionLanding {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: left;
+  min-height: 100vh;
+  max-width: 100vw;
+  transform: rotateY(180deg);
+  /* border: 5px solid red; */
+}
+.divLanding {
+  width: 50%;
+  max-width: 100vw;
+  padding: 5%;
+  margin-left: 10%;
+  border-radius: 10px;
+  backdrop-filter: blur(5px);
+  background: #fffafb9a;
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.158);
+  /* box-shadow: -4px -4px 12px rgba(255, 255, 255, 0.158); */
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  /* background: url("/images/example-8.svg"); */
+}
+.divLanding .input__box {
+  cursor: pointer;
+  background: #114b5f;
+  max-width: 300px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  padding: 10px 20px;
+  letter-spacing: 1px;
+  border-radius: 35px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+.divLanding .input__box a {
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+}
+.divLanding a {
+  text-decoration: none;
+  color: #114b5f;
+}
+#sectionAuth {
   /* background: url("/images/pexels-helena-lopes-697243.jpg");
   background-repeat: no-repeat;
   background-size: 100% 100%; */
@@ -17,7 +79,8 @@ section {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  min-width: 100vw;
+  max-width: 100vw;
+  /* border: 5px solid red; */
 }
 .box {
   position: relative;
@@ -55,11 +118,11 @@ section {
   justify-content: center;
 }
 .form h2::before {
-  width: 80px;
+  width: 150px;
   height: 4px;
   content: "";
   bottom: -15px;
-  background: #82ddf0ff;
+  background: #114b5f;
   position: absolute;
   display: flex;
   justify-content: center;
@@ -91,7 +154,7 @@ section {
 .form .input__box input[type="submit"] {
   color: rgb(255, 255, 255);
   cursor: pointer;
-  background: #82ddf0ff;
+  background: #114b5f;
   max-width: 100px;
   font-weight: 600;
   margin-bottom: 20px;
