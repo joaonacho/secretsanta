@@ -1,9 +1,10 @@
+<button><a href="/auth/logout">Logout</a></button>
+
+<img src="{{user.profileImg}}" alt="Profile Pic" style="width: 80px;" />
+
 <h1>hello {{user.username}}</h1>
+
+<h4>{{user.interests}}</h4>
 
 <button> <a href="/group/creategroup">Create new group</a></button>
 <button> <a href="/user/profile/edit/{{user._id}}">Edit Profile</a></button>
-<button><a href="/auth/logout">Logout</a></button>
-
-<h1>{{user.interests}}</h1>
-
-<img src="{{user.profileImg}}" alt="Profile Pic" style="width: 150px;" />
