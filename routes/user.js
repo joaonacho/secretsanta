@@ -18,8 +18,8 @@ router.get("/profile", isLoggedIn, (req, res, next) => {
     .then((usersInGroup) => {
       // console.log(usersInGroup[0].groups[0].users, req.session.user._id);
       let users = [...usersInGroup[0].groups[0].users];
-
       console.log(users);
+
       res.render("user/profilepage", {
         user: req.session.user,
         usersInGroup: usersInGroup[0].groups,
@@ -37,7 +37,6 @@ router.get("/profile/edit/:id", (req, res, next) => {
 
 //POST Edit profile
 router.post("/profile/edit/:id", (req, res, next) => {
-  console.log("enter post edit");
   const { id } = req.params;
 
   let profileImg = req.body.profileImg;
@@ -49,7 +48,7 @@ router.post("/profile/edit/:id", (req, res, next) => {
 
   User.findByIdAndUpdate(id, { username, interests, profileImg }, { new: true })
     .then((updatedUser) => {
-      //console.log(updatedUser);
+      req.session.user = updatedUser;
       res.render("user/profilepage", { user: updatedUser });
     })
     .catch((error) => {

@@ -33,10 +33,8 @@ router.post("/creategroup", (req, res, next) => {
           groupImg,
         })
           .then((createdGroup) => {
-            console.log(createdGroup);
             return User.findByIdAndUpdate(admin, {
               $push: { groups: createdGroup._id },
-              role: "admin",
             });
           })
           .then((user) => {
