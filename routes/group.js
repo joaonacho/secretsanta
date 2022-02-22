@@ -18,15 +18,30 @@ router.get("/creategroup", (req, res) => {
 //POST Create group
 router.post("/creategroup", (req, res, next) => {
   const { groupName, description, price, groupImg } = req.body;
+  let admin = req.session.user._id;
+  let users = [req.session.user._id];
 
   Group.findOne({ groupName })
     .then((newGroup) => {
       if (!newGroup) {
-        Group.create({ groupName, description, price, groupImg }).then(
-          (createdGroup) => {
+        Group.create({
+          admin,
+          groupName,
+          description,
+          users,
+          price,
+          groupImg,
+        })
+          .then((createdGroup) => {
+            console.log(createdGroup);
+            return User.findByIdAndUpdate(admin, {
+              $push: { groups: createdGroup._id },
+              role: "admin",
+            });
+          })
+          .then((user) => {
             res.redirect("/group/group");
-          }
-        );
+          });
       }
     })
     .catch((error) => {

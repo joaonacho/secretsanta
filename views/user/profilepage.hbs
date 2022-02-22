@@ -4,7 +4,13 @@
 
 <h1>hello {{user.username}}</h1>
 
-<h4>{{user.interests}}</h4>
+<h4>Interests:</h4>
+<p>{{user.interests}}</p>
 
 <button> <a href="/group/creategroup">Create new group</a></button>
 <button> <a href="/user/profile/edit/{{user._id}}">Edit Profile</a></button>
+
+{{#each usersInGroup}}
+  <h2>{{this.groupName}}</h2>
+  <img src="{{this.groupImg}}" alt="group_image" />
+{{/each}}

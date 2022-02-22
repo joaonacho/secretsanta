@@ -2,7 +2,6 @@ const { Schema, model } = require("mongoose");
 
 const userSchema = new Schema(
   {
-    role: { type: String, enum: ["user", "admin"], default: "user" },
     username: {
       type: String,
       unique: true,
@@ -28,7 +27,7 @@ const userSchema = new Schema(
       default:
         "https://res.cloudinary.com/dxxmsbtrt/image/upload/v1645126731/SecretSanta/avatar-profile_ty1qpt.webp",
     },
-    interests: { type: String, default: "What" },
+    interests: { type: String },
   },
   {
     timestamps: true,
