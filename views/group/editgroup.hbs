@@ -1,6 +1,6 @@
 <h1>Edit group page</h1>
 
-<form action="/group/{{_id}}/editgroup" method="post">
+<form action="/group/group/edit/{{_id}}" method="post">
   <fieldset>
     <label for="groupName">
       Group name
@@ -10,7 +10,7 @@
       type="text"
       id="groupName"
       name="groupName"
-      value="{{groupName}}"
+      value="{{group.groupName}}"
     />
   </fieldset>
 
@@ -23,18 +23,31 @@
       id="description"
       cols="50"
       rows="4"
-      value="{{description}}"
-    ></textarea>
+    >{{group.description}}</textarea>
   </fieldset>
 
-  <fieldset>
-    <label for="users">
-      Insert your friends name here
-    </label>
-    <input required type="text" name="users" id="users" />
-    <label for="email">Email</label>
-    <input required type="email" name="email" id="email" />
-  </fieldset>
+  {{#each group.users}}
+    <fieldset>
+      <label for="users">
+        Insert your friends name here
+      </label>
+      <input
+        required
+        type="text"
+        name="users"
+        id="users"
+        value="{{this.username}}"
+      />
+      <label for="email">Email</label>
+      <input
+        required
+        type="email"
+        name="email"
+        id="email"
+        value="{{this.email}}"
+      />
+    </fieldset>
+  {{/each}}
 
   <fieldset>
     <label for="users">
@@ -55,7 +68,7 @@
       id="price"
       name="price"
       min="1"
-      value="{{price}}"
+      value="{{group.price}}"
     />
   </fieldset>
 

@@ -1,3 +1,15 @@
-<h1>Group page</h1>
-
 <a href="/">Home</a>
+
+<img src="{{group.groupImg}}" alt="group_cover_image" />
+<h1>{{group.groupName}}</h1>
+<p>{{group.description}}</p>
+<p>Maximum gift price:{{group.price}}</p>
+
+<button><a href="/group/group/edit/{{group._id}}">Edit Group </a></button>
+
+{{#each group.users}}
+  <h4>{{username}}</h4>
+  <img src="{{profileImg}}" alt="" style="width: 30px;" />
+{{/each}}
+
+<p>{{group.comments}}</p>

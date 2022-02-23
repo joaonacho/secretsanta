@@ -11,7 +11,7 @@
 <button> <a href="/user/profile/edit/{{user._id}}">Edit Profile</a></button>
 
 {{#each usersInGroup}}
-  <h2>{{this.groupName}}</h2>
+  <h2> <a href="/group/group/{{_id}}"> {{this.groupName}} </a></h2>
   <p>{{this.description}}</p>
   <img src="{{this.groupImg}}" alt="group_image" />
 {{/each}}

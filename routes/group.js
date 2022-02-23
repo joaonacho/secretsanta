@@ -38,7 +38,7 @@ router.post("/creategroup", (req, res, next) => {
             });
           })
           .then((user) => {
-            res.redirect("/group/group");
+            res.redirect("/user/profile");
           });
       }
     })
@@ -48,21 +48,31 @@ router.post("/creategroup", (req, res, next) => {
 });
 
 //GET View group
-router.get("/group", (req, res) => {
-  res.render("group/group");
+router.get("/group/:id", (req, res) => {
+  const { id } = req.params;
+
+  Group.findById(id)
+    .populate("users")
+    .then((group) => {
+      // console.log(group);
+      res.render("group/group", { group });
+    });
 });
 
 //GET Edit group
-router.get("/editgroup/:id", (req, res) => {
+router.get("/group/edit/:id", (req, res) => {
   const { id } = req.params;
 
-  Group.findById(id).then((group) => {
-    res.render("group/editgroup", { group });
-  });
+  Group.findById(id)
+    .populate("users")
+    .then((group) => {
+      // console.log(group);
+      res.render("group/editgroup", { group });
+    });
 });
 
 //POST Edit group
-router.post("/editgroup/:id", (req, res, next) => {
+router.post("/group/edit/:id", (req, res, next) => {
   const { id } = req.params;
   const { groupName, description, users, email, price, groupImg } = req.body;
 
@@ -79,7 +89,7 @@ router.post("/editgroup/:id", (req, res, next) => {
     { new: true }
   )
     .then((updatedGroup) => {
-      res.redirect("group/group");
+      res.redirect("/user/profile");
     })
     .catch((error) => {
       next(error);
