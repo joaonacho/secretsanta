@@ -26,8 +26,10 @@ app.locals.title = `${capitalized(projectName)} created with IronLauncher`;
 
 app.use((req, res, next) => {
   res.locals.userIsConnected = req.session.user ? true : false;
-  res.locals.username = req.session.user.username;
-  res.locals.profileImg = req.session.user.profileImg;
+  if(res.locals.userIsConnected) {
+        res.locals.username = req.session.user.username;
+        res.locals.profileImg = req.session.user.profileImg;
+  }
   next();
 });
 
