@@ -125,6 +125,7 @@ router.post("/add/:groupId", (req, res, next) => {
   const { username } = req.body.users;
   const { email } = req.body.email;
 
+  //
   // console.log(req.body);
 
   // User.findOne(email)
@@ -135,16 +136,16 @@ router.post("/add/:groupId", (req, res, next) => {
   //   })
   // .then((newFriends) => {
   //   console.log(newFriends);
-  Group.findByIdAndUpdate(
-    groupId,
-    { $push: { users: username } },
-    { new: true }
-  )
-    .then((friendsAdded) => {
-      res.redirect("/user/profile");
-    })
-    // })
-    .catch((error) => next(error));
+  // Group.findByIdAndUpdate(
+  //   groupId,
+  //   { $push: { users: username } },
+  //   { new: true }
+  // )
+  // .then((friendsAdded) => {
+  res.redirect(`/group/group/${groupId}`);
+  // })
+  // })
+  // .catch((error) => next(error));
 });
 
 //Working properly
