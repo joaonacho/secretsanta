@@ -36,6 +36,8 @@
         >
           <div class="offcanvas-header">
             <h5 class="offcanvas-title" id="offcanvasNavbarLabel">"Bem-vindo {{username}}"</h5>
+
+            <img src="{{profileImg}}" alt="profile-image" style="width: 50px; border-radius:50%">
             <button
               type="button"
               class="btn-close text-reset"
@@ -46,10 +48,10 @@
           <div class="offcanvas-body">
             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                <a class="nav-link active" aria-current="page" href="/">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/user/profile/edit/{{user._id}}">Editar o meu perfil</a>
+                <a class="nav-link" href="/user/profile">Ver o meu perfil</a>
               </li>
               <li class="nav-item dropdown">
                 <a
