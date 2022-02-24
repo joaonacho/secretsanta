@@ -125,7 +125,7 @@ router.post("/add/:groupId", (req, res, next) => {
   const { username } = req.body.users;
   const { email } = req.body.email;
 
-  console.log(req.body);
+  // console.log(req.body);
 
   // User.findOne(email)
   //   .then((userFound) => {
@@ -137,7 +137,7 @@ router.post("/add/:groupId", (req, res, next) => {
   //   console.log(newFriends);
   Group.findByIdAndUpdate(
     groupId,
-    { $push: { users: newFriends.id } },
+    { $push: { users: username } },
     { new: true }
   )
     .then((friendsAdded) => {
