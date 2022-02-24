@@ -32,7 +32,7 @@
         Insert your friends name here
       </label>
       <input
-        required
+        {{! required }}
         type="text"
         name="users"
         id="users"
@@ -40,7 +40,7 @@
       />
       <label for="email">Email</label>
       <input
-        required
+        {{! required }}
         type="email"
         name="email"
         id="email"
@@ -53,9 +53,9 @@
     <label for="users">
       Insert your friends name here
     </label>
-    <input required type="text" name="users" id="users" />
+    <input {{! required }} type="text" name="users" id="users" />
     <label for="email">Email</label>
-    <input required type="email" name="email" id="email" />
+    <input {{! required  }} type="email" name="email" id="email" />
   </fieldset>
 
   <fieldset>
@@ -80,9 +80,6 @@
   </fieldset>
 
   <button type="submit">Save changes</button>
-
-  <form action="/group/{{_id}}/delete" method="post">
-    <button>Delete group</button>
-  </form>
-
 </form>
+
+<button> <a href="/group/group/delete/{{group._id}}"> Delete group</a></button>

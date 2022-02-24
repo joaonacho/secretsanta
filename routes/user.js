@@ -20,10 +20,12 @@ router.get("/profile", isLoggedIn, (req, res, next) => {
       let users = [...usersInGroup[0].groups[0].users];
       console.log(users);
 
+      // if (users.includes(req.session.id) === true) {
       res.render("user/profilepage", {
         user: req.session.user,
         usersInGroup: usersInGroup[0].groups,
       });
+      // }
     });
 });
 

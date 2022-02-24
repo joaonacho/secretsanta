@@ -54,7 +54,6 @@ router.get("/group/:id", (req, res) => {
   Group.findById(id)
     .populate("users")
     .then((group) => {
-      // console.log(group);
       res.render("group/group", { group });
     });
 });
@@ -66,7 +65,6 @@ router.get("/group/edit/:id", (req, res) => {
   Group.findById(id)
     .populate("users")
     .then((group) => {
-      // console.log(group);
       res.render("group/editgroup", { group });
     });
 });
@@ -89,23 +87,33 @@ router.post("/group/edit/:id", (req, res, next) => {
     { new: true }
   )
     .then((updatedGroup) => {
-      res.redirect("/user/profile");
+      res.redirect("/user/profilepage");
     })
     .catch((error) => {
       next(error);
     });
 });
 
-//POST Delete group
-router.post("/group/:id/delete", (req, res, next) => {
+//GET delete group
+router.get("/group/delete/:id", (req, res) => {
+  const { id } = req.params;
+
+  Group.findById(id).then((groupDelete) => {
+    res.render("group/deletegroup", { groupDelete });
+  });
+});
+
+// POST Delete group
+router.post("/group/delete/:id", (req, res, next) => {
   const { id } = req.params;
 
   Group.findByIdAndDelete(id)
     .then(() => {
-      res.redirect("user/profilepage");
+      res.redirect("/user/profile");
     })
     .catch((error) => {
-      next(error);
+      console.log(error);
+      next();
     });
 });
 
