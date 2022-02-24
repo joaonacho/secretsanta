@@ -1,6 +1,12 @@
-<a href="/">Home</a>
+<h1>grouppage</h1>
+<h1>grouppage</h1>
+<h1>grouppage</h1>
+<h1>grouppage</h1>
 
-<img src="{{group.groupImg}}" alt="group_cover_image" />
+<a href="/">Home</a>
+<a href="/user/profile">profile</a>
+
+<img src="{{group.groupImg}}" alt="group_cover_image" style="width: 500px;" />
 <h1>{{group.groupName}}</h1>
 <p>{{group.description}}</p>
 <p>Maximum gift price:{{group.price}}</p>
@@ -9,7 +15,7 @@
 
 {{#each group.users}}
   <h4>{{username}}</h4>
-  <img src="{{profileImg}}" alt="" style="width: 30px;" />
+  <img src="{{profileImg}}" alt="" style="width: 30px; border-radius: 50%" />
 {{/each}}
 
 <p>{{group.comments}}</p>

@@ -4,6 +4,9 @@ const router = require("express").Router();
 const User = require("../models/User.model");
 const Group = require("../models/Group.model");
 
+//Cloudinary
+const fileUploader = require("../config/cloudinary.config");
+
 const mongoose = require("mongoose");
 
 // Require necessary (isLoggedOut and isLiggedIn) middleware in order to control access to specific routes
@@ -16,36 +19,40 @@ router.get("/creategroup", (req, res) => {
 });
 
 //POST Create group
-router.post("/creategroup", (req, res, next) => {
-  const { groupName, description, price, groupImg } = req.body;
-  let admin = req.session.user._id;
-  let users = [req.session.user._id];
+router.post(
+  "/creategroup",
+  fileUploader.single("groupImg"),
+  (req, res, next) => {
+    const { groupName, description, price } = req.body;
+    let admin = req.session.user._id;
+    let users = [req.session.user._id];
 
-  Group.findOne({ groupName })
-    .then((newGroup) => {
-      if (!newGroup) {
-        Group.create({
-          admin,
-          groupName,
-          description,
-          users,
-          price,
-          groupImg,
-        })
-          .then((createdGroup) => {
-            return User.findByIdAndUpdate(admin, {
-              $push: { groups: createdGroup._id },
-            });
+    Group.findOne({ groupName })
+      .then((newGroup) => {
+        if (!newGroup) {
+          Group.create({
+            admin,
+            groupName,
+            description,
+            users,
+            price,
+            groupImg: req.file.path,
           })
-          .then((user) => {
-            res.redirect("/user/profile");
-          });
-      }
-    })
-    .catch((error) => {
-      next(error);
-    });
-});
+            .then((createdGroup) => {
+              return User.findByIdAndUpdate(admin, {
+                $push: { groups: createdGroup._id },
+              });
+            })
+            .then((user) => {
+              res.redirect("/user/profile");
+            });
+        }
+      })
+      .catch((error) => {
+        next(error);
+      });
+  }
+);
 
 //GET View group
 router.get("/group/:id", (req, res) => {
@@ -70,30 +77,44 @@ router.get("/group/edit/:id", (req, res) => {
 });
 
 //POST Edit group
-router.post("/group/edit/:id", (req, res, next) => {
-  const { id } = req.params;
-  const { groupName, description, users, email, price, groupImg } = req.body;
+router.post(
+  "/group/edit/:id",
+  fileUploader.single("groupImg"),
+  (req, res, next) => {
+    const { id } = req.params;
+    let users = [req.body.users];
 
-  Group.findByIdAndUpdate(
-    id,
-    {
-      groupName,
-      description,
-      users,
-      email,
-      price,
-      groupImg,
-    },
-    { new: true }
-  )
-    .then((updatedGroup) => {
-      res.redirect("/user/profile");
-    })
-    .catch((error) => {
-      next(error);
-    });
-});
+    const { groupName, description, email, price, existingImage } = req.body;
 
+    let groupImg;
+    if (req.file) {
+      groupImg = req.file.path;
+    } else {
+      groupImg = existingImage;
+    }
+
+    Group.findByIdAndUpdate(
+      id,
+      {
+        groupName,
+        description,
+        users,
+        email,
+        price,
+        groupImg,
+      },
+      { new: true }
+    )
+      .then((updatedGroup) => {
+        res.redirect("/user/profile");
+      })
+      .catch((error) => {
+        next(error);
+      });
+  }
+);
+
+//Working properly
 //GET delete group
 router.get("/group/delete/:id", (req, res) => {
   const { id } = req.params;
@@ -112,8 +133,7 @@ router.post("/group/delete/:id", (req, res, next) => {
       res.redirect("/user/profile");
     })
     .catch((error) => {
-      console.log(error);
-      next();
+      next(error);
     });
 });
 

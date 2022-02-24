@@ -1,6 +1,10 @@
 <h1>Edit group page</h1>
 
-<form action="/group/edit/{{group._id}}" method="post">
+<form
+  action="/group/edit/{{group._id}}"
+  method="post"
+  enctype="multipart/form-data"
+>
   <fieldset>
     <label for="groupName">
       Group name

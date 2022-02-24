@@ -1,6 +1,15 @@
+<h1>profilepage</h1>
+<h1>profilepage</h1>
+<h1>profilepage</h1>
+<h1>profilepage</h1>
+
 <button><a href="/auth/logout">Logout</a></button>
 
-<img src="{{user.profileImg}}" alt="Profile Pic" style="width: 80px;" />
+<img
+  src="{{user.profileImg}}"
+  alt="Profile Pic"
+  style="width: 80px; border-radius: 50%"
+/>
 
 <h1>hello {{user.username}}</h1>
 
@@ -11,7 +20,6 @@
 <button> <a href="/user/profile/edit/{{user._id}}">Edit Profile</a></button>
 
 {{#each usersInGroup}}
+  <img src="{{this.groupImg}}" alt="group_image" style="width: 250px;" />
   <h2> <a href="/group/group/{{_id}}"> {{this.groupName}} </a></h2>
-  <p>{{this.description}}</p>
-  <img src="{{this.groupImg}}" alt="group_image" />
 {{/each}}

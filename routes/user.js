@@ -4,6 +4,9 @@ const router = require("express").Router();
 const User = require("../models/User.model");
 const Group = require("../models/Group.model");
 
+//Cloudinary
+const fileUploader = require("../config/cloudinary.config");
+
 const mongoose = require("mongoose");
 
 // Require necessary (isLoggedOut and isLiggedIn) middleware in order to control access to specific routes
@@ -38,24 +41,40 @@ router.get("/profile/edit/:id", (req, res, next) => {
 });
 
 //POST Edit profile
-router.post("/profile/edit/:id", (req, res, next) => {
-  const { id } = req.params;
+router.post(
+  "/profile/edit/:id",
+  fileUploader.single("profileImg"),
+  (req, res, next) => {
+    const { id } = req.params;
 
-  let profileImg = req.body.profileImg;
+    // let profileImg = req.body.profileImg;
 
-  if (profileImg === "" || !profileImg) {
-    profileImg = req.session.user.profileImg;
+    // if (profileImg === "" || !profileImg) {
+    //   profileImg = req.session.user.profileImg;
+    // }
+
+    const { username, interests, existingImage } = req.body;
+
+    let profileImg;
+    if (req.file) {
+      profileImg = req.file.path;
+    } else {
+      profileImg = existingImage;
+    }
+
+    User.findByIdAndUpdate(
+      id,
+      { username, interests, profileImg },
+      { new: true }
+    )
+      .then((updatedUser) => {
+        req.session.user = updatedUser;
+        res.redirect("/user/profile");
+      })
+      .catch((error) => {
+        next(error);
+      });
   }
-  const { username, interests } = req.body;
-
-  User.findByIdAndUpdate(id, { username, interests, profileImg }, { new: true })
-    .then((updatedUser) => {
-      req.session.user = updatedUser;
-      res.redirect("/user/profile");
-    })
-    .catch((error) => {
-      next(error);
-    });
-});
+);
 
 module.exports = router;
