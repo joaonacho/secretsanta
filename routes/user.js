@@ -18,7 +18,7 @@ router.get("/profile", isLoggedIn, (req, res, next) => {
     .then((usersInGroup) => {
       // console.log(usersInGroup[0].groups[0].users, req.session.user._id);
       let users = [...usersInGroup[0].groups[0].users];
-      console.log(users);
+      // console.log(users);
 
       // if (users.includes(req.session.id) === true) {
       res.render("user/profilepage", {
@@ -51,7 +51,7 @@ router.post("/profile/edit/:id", (req, res, next) => {
   User.findByIdAndUpdate(id, { username, interests, profileImg }, { new: true })
     .then((updatedUser) => {
       req.session.user = updatedUser;
-      res.render("user/profilepage", { user: updatedUser });
+      res.redirect("/user/profile");
     })
     .catch((error) => {
       next(error);

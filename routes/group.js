@@ -87,7 +87,7 @@ router.post("/group/edit/:id", (req, res, next) => {
     { new: true }
   )
     .then((updatedGroup) => {
-      res.redirect("/user/profilepage");
+      res.redirect("/user/profile");
     })
     .catch((error) => {
       next(error);
