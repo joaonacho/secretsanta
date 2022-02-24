@@ -4,9 +4,11 @@
 
 <h1>{{group.groupName}}</h1>
 
-{{#each group.users}}
-  <h3>{{this.username}}</h3>
-{{/each}}
+<ul>Friends in the group:
+  {{#each group.users}}
+    <li>{{this.username}}</li>
+  {{/each}}
+</ul>
 
 <form action="/group/add/{{group._id}}" method="post">
   <fieldset>
@@ -18,5 +20,5 @@
     <input required type="email" name="email" id="email" />
   </fieldset>
 
-  <button type="submit">Save changes</button>
+  <button type="submit">Add friends</button>
 </form>

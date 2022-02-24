@@ -122,14 +122,28 @@ router.get("/add/:groupId", (req, res) => {
 //POST add friends
 router.post("/add/:groupId", (req, res, next) => {
   const { groupId } = req.params;
-  const { users } = req.body;
+  const { username } = req.body.users;
+  const { email } = req.body.email;
 
   console.log(req.body);
 
-  Group.findByIdAndUpdate(groupId, { users }, { new: true })
+  // User.findOne(email)
+  //   .then((userFound) => {
+  //     if (!userFound) {
+  //       return User.create({ username, email });
+  //     }
+  //   })
+  // .then((newFriends) => {
+  //   console.log(newFriends);
+  Group.findByIdAndUpdate(
+    groupId,
+    { $push: { users: newFriends.id } },
+    { new: true }
+  )
     .then((friendsAdded) => {
-      res.redirect("/group/:groupId");
+      res.redirect("/user/profile");
     })
+    // })
     .catch((error) => next(error));
 });
 
