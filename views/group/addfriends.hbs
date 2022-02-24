@@ -1,0 +1,22 @@
+<h1>Add friends</h1>
+
+<button><a href="/user/profile">back</a></button>
+
+<h1>{{group.groupName}}</h1>
+
+{{#each group.users}}
+  <h3>{{this.username}}</h3>
+{{/each}}
+
+<form action="/group/add/{{group._id}}" method="post">
+  <fieldset>
+    <label for="users">
+      Insert your friends name here
+    </label>
+    <input required type="text" name="users" id="users" />
+    <label for="email">Email</label>
+    <input required type="email" name="email" id="email" />
+  </fieldset>
+
+  <button type="submit">Save changes</button>
+</form>

@@ -77,42 +77,61 @@ router.get("/group/edit/:id", (req, res) => {
 });
 
 //POST Edit group
-router.post(
-  "/group/edit/:id",
-  fileUploader.single("groupImg"),
-  (req, res, next) => {
-    const { id } = req.params;
-    let users = [req.body.users];
+router.post("/edit/:id", fileUploader.single("groupImg"), (req, res, next) => {
+  const { id } = req.params;
 
-    const { groupName, description, email, price, existingImage } = req.body;
+  console.log(req.body);
+  const { groupName, description, price, existingImage } = req.body;
 
-    let groupImg;
-    if (req.file) {
-      groupImg = req.file.path;
-    } else {
-      groupImg = existingImage;
-    }
-
-    Group.findByIdAndUpdate(
-      id,
-      {
-        groupName,
-        description,
-        users,
-        email,
-        price,
-        groupImg,
-      },
-      { new: true }
-    )
-      .then((updatedGroup) => {
-        res.redirect("/user/profile");
-      })
-      .catch((error) => {
-        next(error);
-      });
+  let groupImg;
+  if (req.file) {
+    groupImg = req.file.path;
+  } else {
+    groupImg = existingImage;
   }
-);
+
+  Group.findByIdAndUpdate(
+    id,
+    {
+      groupName,
+      description,
+      price,
+      groupImg,
+    },
+    { new: true }
+  )
+    .then((updatedGroup) => {
+      res.redirect("/user/profile");
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
+
+//GET add friends
+router.get("/add/:groupId", (req, res) => {
+  const { groupId } = req.params;
+
+  Group.findById(groupId)
+    .populate("users")
+    .then((group) => {
+      res.render("group/addfriends", { group });
+    });
+});
+
+//POST add friends
+router.post("/add/:groupId", (req, res, next) => {
+  const { groupId } = req.params;
+  const { users } = req.body;
+
+  console.log(req.body);
+
+  Group.findByIdAndUpdate(groupId, { users }, { new: true })
+    .then((friendsAdded) => {
+      res.redirect("/group/:groupId");
+    })
+    .catch((error) => next(error));
+});
 
 //Working properly
 //GET delete group

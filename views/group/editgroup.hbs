@@ -30,38 +30,6 @@
     >{{group.description}}</textarea>
   </fieldset>
 
-  {{#each group.users}}
-    <fieldset>
-      <label for="users">
-        Insert your friends name here
-      </label>
-      <input
-        {{! required }}
-        type="text"
-        name="users"
-        id="users"
-        value="{{this.username}}"
-      />
-      <label for="email">Email</label>
-      <input
-        {{! required }}
-        type="email"
-        name="email"
-        id="email"
-        value="{{this.email}}"
-      />
-    </fieldset>
-  {{/each}}
-
-  <fieldset>
-    <label for="users">
-      Insert your friends name here
-    </label>
-    <input {{! required }} type="text" name="users" id="users" />
-    <label for="email">Email</label>
-    <input {{! required  }} type="email" name="email" id="email" />
-  </fieldset>
-
   <fieldset>
     <label for="price">
       Gift price limit
@@ -75,6 +43,10 @@
       value="{{group.price}}"
     />
   </fieldset>
+
+  {{#each group.users}}
+    {{this.username}}
+  {{/each}}
 
   <fieldset>
     <label for="groupImg">
