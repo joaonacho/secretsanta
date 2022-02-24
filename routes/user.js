@@ -16,6 +16,7 @@ const { populate } = require("../models/User.model");
 
 //GET profile page
 router.get("/profile", isLoggedIn, (req, res, next) => {
+    
   User.find()
     .populate("groups")
     .then((usersInGroup) => {
@@ -34,6 +35,7 @@ router.get("/profile", isLoggedIn, (req, res, next) => {
 
 //GET Edit profile
 router.get("/profile/edit/:id", (req, res, next) => {
+    
   const { id } = req.params;
   User.findById(id).then((updateUser) => {
     res.render("user/editprofile", { user: updateUser });
