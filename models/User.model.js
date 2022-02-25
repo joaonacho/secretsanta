@@ -4,7 +4,6 @@ const userSchema = new Schema(
   {
     username: {
       type: String,
-      unique: true,
       required: [true, "My friend, we need names!"],
       trim: true,
     },

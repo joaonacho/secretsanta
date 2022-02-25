@@ -23,9 +23,16 @@ router.post(
   "/creategroup",
   fileUploader.single("groupImg"),
   (req, res, next) => {
-    const { groupName, description, price } = req.body;
+    const { groupName, description, price, existingImage } = req.body;
     let admin = req.session.user._id;
     let users = [req.session.user._id];
+
+    let groupImg;
+    if (req.file) {
+      groupImg = req.file.path;
+    } else {
+      groupImg = existingImage;
+    }
 
     Group.findOne({ groupName })
       .then((newGroup) => {
@@ -36,7 +43,7 @@ router.post(
             description,
             users,
             price,
-            groupImg: req.file.path,
+            groupImg,
           })
             .then((createdGroup) => {
               return User.findByIdAndUpdate(admin, {
@@ -80,7 +87,6 @@ router.get("/group/edit/:id", (req, res) => {
 router.post("/edit/:id", fileUploader.single("groupImg"), (req, res, next) => {
   const { id } = req.params;
 
-  console.log(req.body);
   const { groupName, description, price, existingImage } = req.body;
 
   let groupImg;
@@ -101,7 +107,7 @@ router.post("/edit/:id", fileUploader.single("groupImg"), (req, res, next) => {
     { new: true }
   )
     .then((updatedGroup) => {
-      res.redirect("/user/profile");
+      res.redirect(`/group/group/${id}`);
     })
     .catch((error) => {
       next(error);
@@ -122,33 +128,52 @@ router.get("/add/:groupId", (req, res) => {
 //POST add friends
 router.post("/add/:groupId", (req, res, next) => {
   const { groupId } = req.params;
-  const { username } = req.body.users;
-  const { email } = req.body.email;
+  const username = req.body.users;
+  const email = req.body.email;
 
-  //
-  // console.log(req.body);
-
-  // User.findOne(email)
-  //   .then((userFound) => {
-  //     if (!userFound) {
-  //       return User.create({ username, email });
-  //     }
-  //   })
-  // .then((newFriends) => {
-  //   console.log(newFriends);
-  // Group.findByIdAndUpdate(
-  //   groupId,
-  //   { $push: { users: username } },
-  //   { new: true }
-  // )
-  // .then((friendsAdded) => {
-  res.redirect(`/group/group/${groupId}`);
-  // })
-  // })
-  // .catch((error) => next(error));
+  //first try to find the user
+  User.findOne({ email })
+    .then((userFound) => {
+      //if not found, create a new user
+      if (!userFound) {
+        User.create({
+          username,
+          email,
+          password: "misteryFriend@2022",
+          groups: groupId,
+        }).then(() => {
+          console.log("user created");
+        });
+        //if found, just update
+      } else {
+        User.findOneAndUpdate(
+          email,
+          { $push: { groups: groupId } },
+          { new: true }
+        ).then(() => {
+          console.log("user updated");
+        });
+      }
+    })
+    //after creating or update the user, catch his ID
+    .then(() => {
+      User.findOne({ email }).then((userId) => {
+        console.log(userId._id);
+        //Search for the group and push the user ID to the users Array
+        Group.findByIdAndUpdate(
+          groupId,
+          { $push: { users: userId._id } },
+          { new: true }
+        ).then(() => {
+          res.redirect(`/group/group/${groupId}`);
+        });
+      });
+    })
+    .catch((error) => {
+      next(error);
+    });
 });
 
-//Working properly
 //GET delete group
 router.get("/group/delete/:id", (req, res) => {
   const { id } = req.params;

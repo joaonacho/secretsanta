@@ -13,6 +13,13 @@
           <div class="input__box">
             <input type="submit" value="Login" />
           </div>
+
+          {{#if errorMessage}}
+
+            {{errorMessage}}
+
+          {{/if}}
+
           <p class="forget">Don't have an account?
             <a href="/auth/signup"> Sign Up</a></p>
         </form>
@@ -20,9 +27,3 @@
     </div>
   </div>
 </section>
-
-{{#if errorMessage}}
-
-  {{errorMessage}}
-
-{{/if}}
