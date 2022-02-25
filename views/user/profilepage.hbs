@@ -19,7 +19,15 @@
 <button> <a href="/group/creategroup">Create new group</a></button>
 <button> <a href="/user/profile/edit/{{user._id}}">Edit Profile</a></button>
 
-{{#each usersInGroup}}
-  <img src="{{this.groupImg}}" alt="group_image" style="width: 250px;" />
-  <h2> <a href="/group/group/{{_id}}"> {{this.groupName}} </a></h2>
-{{/each}}
+{{#if usersInGroup}}
+  {{#each usersInGroup}}
+
+    <div class="card text-center" style="width: 18rem;">
+      <img src="{{this.groupImg}}" class="card-img-top" alt="group_image" />
+      <div class="card-body">
+        <h2 class="card-text">
+          <a href="/group/group/{{_id}}"> {{this.groupName}} </a></h2>
+      </div>
+    </div>
+  {{/each}}
+{{/if}}

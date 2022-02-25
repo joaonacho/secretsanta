@@ -85,7 +85,7 @@ router.post(
           // Bind the user to the session object
           req.session.user = user;
 
-          res.redirect("/user/profile");
+          res.redirect("/");
         })
         .catch((error) => {
           if (error instanceof mongoose.Error.ValidationError) {

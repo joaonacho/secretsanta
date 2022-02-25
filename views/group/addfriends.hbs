@@ -6,6 +6,11 @@
 
 <ul>Friends in the group:
   {{#each group.users}}
+    <img
+      src="{{this.profileImg}}"
+      alt=""
+      style="width: 30px; border-radius: 50%"
+    />
     <li>{{this.username}}</li>
   {{/each}}
 </ul>

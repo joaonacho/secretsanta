@@ -158,11 +158,11 @@ router.post("/add/:groupId", (req, res, next) => {
     //after creating or update the user, catch his ID
     .then(() => {
       User.findOne({ email }).then((userId) => {
-        console.log(userId._id);
+        console.log(userId.id);
         //Search for the group and push the user ID to the users Array
         Group.findByIdAndUpdate(
           groupId,
-          { $push: { users: userId._id } },
+          { $push: { users: userId.id } },
           { new: true }
         ).then(() => {
           res.redirect(`/group/group/${groupId}`);
