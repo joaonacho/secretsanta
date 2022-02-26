@@ -12,6 +12,7 @@ const mongoose = require("mongoose");
 // Require necessary (isLoggedOut and isLiggedIn) middleware in order to control access to specific routes
 const isLoggedOut = require("../middleware/isLoggedOut");
 const isLoggedIn = require("../middleware/isLoggedIn");
+const isGroupAdmin = require("../middleware/isGroupAdmin");
 
 //GET Create group
 router.get("/creategroup", (req, res) => {
@@ -69,12 +70,14 @@ router.get("/group/:id", (req, res) => {
     .populate("users")
     .then((group) => {
       const admin = group.admin.toString() === req.session.user._id;
+      req.session.groupAdmin = group.admin.toString();
+
       res.render("group/group", { group, admin });
     });
 });
 
 //GET Edit group
-router.get("/group/edit/:id", (req, res) => {
+router.get("/group/edit/:id", isGroupAdmin, (req, res) => {
   const { id } = req.params;
 
   Group.findById(id)

@@ -47,6 +47,7 @@ app.use("/group", groupRoutes);
 
 //user routes here
 const userRoutes = require("./routes/user");
+const res = require("express/lib/response");
 app.use("/user", userRoutes);
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
