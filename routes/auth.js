@@ -61,13 +61,32 @@ router.post(
 
     // Search the database for a user with the username submitted in the form
     User.findOne({ email }).then((found) => {
+      console.log(found.password);
       // If the user is found, send the message username is taken
-      if (found) {
+      if (found && found.password !== "misteryFriend@2022") {
         return res
           .status(400)
           .render("auth/signup", { errorMessage: "email already taken." });
+      } else if (found && found.password === "misteryFriend@2022") {
+        const userId = found._id;
+        return bcrypt
+          .genSalt(saltRounds)
+          .then((salt) => bcrypt.hash(password, salt))
+          .then((hashedPassword) => {
+            return User.updateOne(
+              { _id: userId },
+              {
+                username,
+                password: hashedPassword,
+                profileImg,
+              }
+            );
+          })
+          .then((user) => {
+            // req.session.user = user;
+            res.redirect("/auth/login");
+          });
       }
-
       // if user is not found, create a new user - start with hashing the password
       return bcrypt
         .genSalt(saltRounds)

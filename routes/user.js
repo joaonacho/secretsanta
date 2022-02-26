@@ -22,9 +22,9 @@ router.get("/profile", isLoggedIn, (req, res, next) => {
   User.findById(userId)
     .populate("groups")
     .then((usersInGroup) => {
-      // console.log(usersInGroup.groups);
+      console.log(usersInGroup);
 
-      if (!usersInGroup.groups) {
+      if (!usersInGroup) {
         res.render("user/profilepage", {
           user: req.session.user,
         });
@@ -35,37 +35,6 @@ router.get("/profile", isLoggedIn, (req, res, next) => {
         });
       }
     });
-
-  // let userId = [...usersInGroup.groups];
-  //   if (usersInGroup) {
-  //     res.render("user/profilepage", {
-  //       user: req.session.user,
-  //
-  //     });
-  //   } else {
-  //     res.render("user/profilepage", {
-  //       user: req.session.user,
-  //     });
-  //   }
-  // });
-  // console.log(userId);
-
-  // usersInGroup.forEach((group) => {
-  //   console.log(group.groups);
-  // });
-
-  // console.log(usersInGroup);
-  // console.log(usersInGroup[0].groups[0].users, req.session.user._id);
-  // let users = [...usersInGroup[0].groups[0].users];
-  // console.log(users);
-
-  // if (users.includes(req.session.id) === true) {
-  //   res.render("user/profilepage", {
-  //     user: req.session.user,
-  //     usersInGroup: usersInGroup[0].groups,
-  //   });
-  //   // }
-  // });
 });
 
 //GET Edit profile
