@@ -17,13 +17,10 @@ const { populate } = require("../models/User.model");
 //GET profile page
 router.get("/profile", isLoggedIn, (req, res, next) => {
   const userId = req.session.user._id;
-  // console.log(req.session.user._id);
 
   User.findById(userId)
     .populate("groups")
     .then((usersInGroup) => {
-      console.log(usersInGroup);
-
       if (!usersInGroup) {
         res.render("user/profilepage", {
           user: req.session.user,
