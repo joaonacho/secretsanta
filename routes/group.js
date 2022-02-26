@@ -130,13 +130,19 @@ router.post("/add/:groupId", (req, res, next) => {
   const { groupId } = req.params;
   const username = req.body.users;
   const email = req.body.email;
+  let group = [];
+
+  Group.findById(groupId).then((groupFound) => {
+    group.push(groupFound.users);
+    // console.log(group);
+  });
 
   //first try to find the user
   User.findOne({ email })
     .then((userFound) => {
       //if not found, create a new user
       if (!userFound) {
-        User.create({
+        return User.create({
           username,
           email,
           password: "misteryFriend@2022",
@@ -144,29 +150,36 @@ router.post("/add/:groupId", (req, res, next) => {
         }).then(() => {
           console.log("user created");
         });
-        //if found, just update
-      } else {
-        User.findOneAndUpdate(
+        // if found and is not in the group, just update
+      } else if (userFound && group[0].includes(userFound.id) === false) {
+        return User.findOneAndUpdate(
           email,
           { $push: { groups: groupId } },
           { new: true }
         ).then(() => {
-          console.log("user updated");
+          console.log("user updated", group[0]);
         });
+        //if user is already in the group, return
+      } else if (userFound && group[0].includes(userFound.id) === true) {
+        return res.redirect(`/group/group/${groupId}`);
       }
     })
     //after creating or update the user, catch his ID
-    .then(() => {
+    .finally(() => {
       User.findOne({ email }).then((userId) => {
-        console.log(userId.id);
         //Search for the group and push the user ID to the users Array
-        Group.findByIdAndUpdate(
-          groupId,
-          { $push: { users: userId.id } },
-          { new: true }
-        ).then(() => {
-          res.redirect(`/group/group/${groupId}`);
-        });
+        //if the user is not in the group
+        if (group[0].includes(userId.id) === false) {
+          return Group.findByIdAndUpdate(
+            groupId,
+            { $push: { users: userId.id } },
+            { new: true }
+          ).then(() => {
+            res.redirect(`/group/group/${groupId}`);
+          });
+        } else if (group.includes(userId.id) === true) {
+          return res.redirect(`/group/group/${groupId}`);
+        }
       });
     })
     .catch((error) => {

@@ -4,6 +4,7 @@
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
+
 body {
   background: linear-gradient(to bottom, #cee3e9, #fbfbff);
   max-height: 100vh;
