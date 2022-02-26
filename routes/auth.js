@@ -26,7 +26,14 @@ router.post(
   isLoggedOut,
   fileUploader.single("profileImg"),
   (req, res) => {
-    const { email, username, password } = req.body;
+    const { email, username, password, existingImage } = req.body;
+
+    let profileImg;
+    if (req.file) {
+      profileImg = req.file.path;
+    } else {
+      profileImg = existingImage;
+    }
 
     if (!username || !email) {
       return res.status(400).render("auth/signup", {
@@ -71,14 +78,14 @@ router.post(
             email,
             username,
             password: hashedPassword,
-            profileImg: req.file.path,
+            profileImg,
           });
         })
         .then((user) => {
           // Bind the user to the session object
           req.session.user = user;
 
-          res.redirect("/user/profile");
+          res.redirect("/");
         })
         .catch((error) => {
           if (error instanceof mongoose.Error.ValidationError) {
