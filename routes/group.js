@@ -176,11 +176,11 @@ router.post("/add/:groupId", (req, res, next) => {
             { $push: { users: user.id } },
             { new: true }
           ).then(() => {
-            res.redirect(`/group/group/${groupId}`);
+            res.redirect(`/group/add/${groupId}`);
           });
         }
 
-        return res.redirect(`/group/group/${groupId}`);
+        return res.redirect(`/group/add/${groupId}`);
       });
     })
     .catch((error) => {
@@ -207,6 +207,66 @@ router.post("/group/delete/:id", (req, res, next) => {
     })
     .catch((error) => {
       next(error);
+    });
+});
+
+//Get Shuffle group
+router.get("/shuffle/:groupId", (req, res) => {
+  const { groupId } = req.params;
+
+  Group.findById(groupId)
+    .populate("users")
+    .then((groupShuffle) => {
+      res.render("group/shufflegroup", { groupShuffle });
+    });
+});
+
+//POST Shuffle group
+router.post("/shuffle/:groupId", (req, res, next) => {
+  const { groupId } = req.params;
+
+  Group.findById(groupId)
+    .populate("users")
+    .then((groupUsers) => {
+      const users = groupUsers.users;
+      let userId = [];
+
+      users.forEach((user) => {
+        return userId.push(user._id);
+      });
+
+      //Shuffle the array
+      let randomPos;
+      let temp;
+
+      for (let i = userId.length - 1; i > 0; i--) {
+        randomPos = Math.floor(Math.random() * (i + 1));
+        temp = userId[i];
+        userId[i] = userId[randomPos];
+        userId[randomPos] = temp;
+      }
+
+      //Make the pairs
+      let idPairs = [];
+      for (let i = 0; i < userId.length; i++) {
+        if (i === userId.length - 1) {
+          idPairs.push([userId[i], userId[0]]);
+        } else {
+          idPairs.push([userId[i], userId[i + 1]]);
+        }
+      }
+
+      return idPairs;
+    })
+    //Updating group pairs (works) & admin (gives error)
+    .then((idPairs) => {
+      Group.findByIdAndUpdate(
+        groupId,
+        { $push: { pairs: idPairs } },
+        { new: true }
+      ).then(() => {
+        res.redirect(`/group/group/${groupId}`);
+      });
     });
 });
 

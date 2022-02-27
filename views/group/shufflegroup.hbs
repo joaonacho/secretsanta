@@ -1,0 +1,23 @@
+<h1>SHUFFLE</h1>
+<h1>SHUFFLE</h1>
+<h1>SHUFFLE</h1>
+<h1>SHUFFLE</h1>
+<h1>SHUFFLE</h1>
+
+<a href="/">Home</a>
+<a href="/user/profile">profile</a>
+
+<h2>Friends in {{groupShuffle.groupName}}</h2>
+<ul>
+  {{#each groupShuffle.users}}
+    <li>{{this.username}}</li>
+  {{/each}}
+</ul>
+
+<h3>Are you sure you want to shuffle {{groupShuffle.groupName}}?</h3>
+
+<button> <a href="/group/group/{{groupShuffle._id}}">No</a></button>
+
+<form action="/group/shuffle/{{groupShuffle._id}}" method="POST">
+  <button type="submit">SHUFFLE</button>
+</form>
