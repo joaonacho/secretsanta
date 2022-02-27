@@ -13,17 +13,17 @@
     <p>Maximum gift price:{{group.price}}</p>
   </div>
 
-<h4>Participants</h4>
+  <h4>Participants</h4>
   <ul>
     {{#each group.users}}
-    <li>{{username}}</li>
+      <li>{{this.username}}</li>
+    {{/each}}
   </ul>
-  {{/each}}
 
   {{#if admin}}
     <button class="btn-green">
       <a href="/group/add/{{group._id}}">Add awesome friends</a></button>
-      <button> <a href="/group/shuffle/{{group._id}}">SHUFFLE</a></button>
+    <button> <a href="/group/shuffle/{{group._id}}">SHUFFLE</a></button>
   {{/if}}
 
   <p>{{group.comments}}</p>
