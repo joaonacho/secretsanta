@@ -1,63 +1,38 @@
 <section id="sectioncreategroup">
-  <h1>Create Group page</h1>
-  <div class="container-editgroup">
- <div class="container-login">
-        <div class="form">
-          <h2>Login Form</h2>
-          <form
-            action="/group/creategroup"
-            method="post"
-            enctype="multipart/form-data"
-          >
-            <div class="input__box">
-              <input required type="text" name="groupName" placeholder="Group name" />
-            </div>
-            <div class="input__box">
-              <input type="text" name="description" placeholder="Description" />
-            </div>
-            <div class="input__box">
-              <input type="number" name="price" placeholder="price" />
-            </div>
-            <div class="input__box">
-              <input type="submit" value="Login" />
-            </div>
-            <p class="forget">Don't have an account?
-              <a href="/auth/signup"> Sign Up</a></p>
-          </form>
-        </div>
-      </div>
-    </section>
-
-    {{!-- <form
+  <div class="my-container form">
+    <h2>Create Group</h2>
+    <form
       action="/group/creategroup"
       method="post"
       enctype="multipart/form-data"
     >
-      <fieldset>
-        <label for="description">
-          Description
-        </label>
-        <textarea
+      <div class="input-box-white">
+        <input required type="text" name="groupName" placeholder="Group name" />
+      </div>
+      <div class="input-box-white">
+        <input
+          type="text"
           name="description"
-          id="description"
-          cols="50"
-          rows="4"
-        ></textarea>
-      </fieldset>
-      <fieldset>
-        <label for="price">
-          Gift price limit
-        </label>
-        <input required type="number" id="price" name="price" min="1" />
-      </fieldset>
-      <fieldset>
-        <label for="groupImg">
-          Upload a cover image
-        </label>
-        <input type="file" id="groupImg" name="groupImg" />
-      </fieldset>
-      <button type="submit">Create group</button>
+          placeholder="Description of the group"
+        />
+      </div>
+      <div class="input-box-white">
+        <input
+          type="number"
+          name="price"
+          placeholder="Select a maximum price"
+        />
+      </div>
+      <div class="input-box-white">
+        <input
+          type="file"
+          name="groupImg"
+          placeholder="Select a maximum price"
+        />
+      </div>
+      <div>
+        <input class="btn-green" type="submit" value="Create Group" />
+      </div>
     </form>
-  </div> --}}
-
-
+  </div>
+</section>

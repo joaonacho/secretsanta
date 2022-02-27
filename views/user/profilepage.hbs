@@ -1,5 +1,5 @@
 <div id="sectionProfile">
-  <div class="profilecontainer">
+  <div class="my-container profile">
     <img class="profileImg" src="{{user.profileImg}}" />
 
     <div class="nameProfile">
@@ -42,13 +42,10 @@
 
     {{/each}}
   {{else}}
-    <div class="groupcontainer">
+    <div class="my-container profile">
       <p class="empty">You aren't in any group, yet. </p>
-      <div>
-        <button class="input__box">
-          <a class="btn-link-white" href="/group/creategroup">Create a group</a></button>
-      </div>
     </div>
   {{/if}}
-
+  <button class="btn-green">
+    <a class="btn-link-white" href="/group/creategroup">Create a group</a></button>
 </div>

@@ -1,28 +1,27 @@
-<section class="sectionAuth">
-  <div class="containersignup">
-    <div class="form">
+<section id="sectionAuth">
+  <div class="my-container form">
+    <div>
       <h2>Sign Up</h2>
       <form action="/auth/signup" method="POST" enctype="multipart/form-data">
-        <div class="input__box">
+        <div class="input-box-white">
           <input type="text" name="username" placeholder="Your name" />
         </div>
-        <div class="input__box">
+        <div class="input-box-white">
           <input type="email" name="email" placeholder="Email" />
         </div>
-        <div class="input__box">
+        <div class="input-box-white">
           <input type="password" name="password" placeholder="Password" />
         </div>
-        <div class="input__box">
-          <input type="submit" value="Sign Up" />
-        </div>
-        <div class="input__box">
-
+        <div class="input-box-white">
           <input
             type="file"
             id="profileImg"
             name="profileImg"
             placeholder="Password"
           />
+        </div>
+        <div>
+          <input class="btn-green" type="submit" value="Sign Up" />
         </div>
 
         <p class="forget">Already registered?
