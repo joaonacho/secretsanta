@@ -12,6 +12,7 @@ const mongoose = require("mongoose");
 // Require necessary (isLoggedOut and isLiggedIn) middleware in order to control access to specific routes
 const isLoggedOut = require("../middleware/isLoggedOut");
 const isLoggedIn = require("../middleware/isLoggedIn");
+const isGroupAdmin = require("../middleware/isGroupAdmin");
 
 //GET Create group
 router.get("/creategroup", (req, res) => {
@@ -68,12 +69,15 @@ router.get("/group/:id", (req, res) => {
   Group.findById(id)
     .populate("users")
     .then((group) => {
-      res.render("group/group", { group });
+      const admin = group.admin.toString() === req.session.user._id;
+      req.session.groupAdmin = group.admin.toString();
+
+      res.render("group/group", { group, admin });
     });
 });
 
 //GET Edit group
-router.get("/group/edit/:id", (req, res) => {
+router.get("/group/edit/:id", isGroupAdmin, (req, res) => {
   const { id } = req.params;
 
   Group.findById(id)
@@ -130,13 +134,18 @@ router.post("/add/:groupId", (req, res, next) => {
   const { groupId } = req.params;
   const username = req.body.users;
   const email = req.body.email;
+  let group;
+
+  Group.findById(groupId).then((groupFound) => {
+    group = groupFound.users;
+  });
 
   //first try to find the user
   User.findOne({ email })
     .then((userFound) => {
-      //if not found, create a new user
+      // if not found, create a new user
       if (!userFound) {
-        User.create({
+        return User.create({
           username,
           email,
           password: "misteryFriend@2022",
@@ -144,29 +153,34 @@ router.post("/add/:groupId", (req, res, next) => {
         }).then(() => {
           console.log("user created");
         });
-        //if found, just update
-      } else {
-        User.findOneAndUpdate(
-          email,
+      }
+      // if found and is not in the group, just update
+      if (userFound && group.includes(userFound.id) === false) {
+        return User.findOneAndUpdate(
+          { email },
           { $push: { groups: groupId } },
           { new: true }
         ).then(() => {
-          console.log("user updated");
+          console.log("user updated", group);
         });
       }
     })
-    //after creating or update the user, catch his ID
-    .then(() => {
-      User.findOne({ email }).then((userId) => {
-        console.log(userId.id);
+    .finally(() => {
+      //after creating or update the user, catch his ID
+      User.findOne({ email }).then((user) => {
         //Search for the group and push the user ID to the users Array
-        Group.findByIdAndUpdate(
-          groupId,
-          { $push: { users: userId.id } },
-          { new: true }
-        ).then(() => {
-          res.redirect(`/group/group/${groupId}`);
-        });
+        //if the user is not in the group
+        if (group.includes(user.id) === false) {
+          return Group.findByIdAndUpdate(
+            groupId,
+            { $push: { users: user.id } },
+            { new: true }
+          ).then(() => {
+            res.redirect(`/group/group/${groupId}`);
+          });
+        }
+
+        return res.redirect(`/group/group/${groupId}`);
       });
     })
     .catch((error) => {

@@ -17,14 +17,11 @@ const { populate } = require("../models/User.model");
 //GET profile page
 router.get("/profile", isLoggedIn, (req, res, next) => {
   const userId = req.session.user._id;
-  // console.log(req.session.user._id);
 
   User.findById(userId)
     .populate("groups")
     .then((usersInGroup) => {
-      // console.log(usersInGroup.groups);
-
-      if (!usersInGroup.groups) {
+      if (!usersInGroup) {
         res.render("user/profilepage", {
           user: req.session.user,
         });
@@ -35,37 +32,6 @@ router.get("/profile", isLoggedIn, (req, res, next) => {
         });
       }
     });
-
-  // let userId = [...usersInGroup.groups];
-  //   if (usersInGroup) {
-  //     res.render("user/profilepage", {
-  //       user: req.session.user,
-  //
-  //     });
-  //   } else {
-  //     res.render("user/profilepage", {
-  //       user: req.session.user,
-  //     });
-  //   }
-  // });
-  // console.log(userId);
-
-  // usersInGroup.forEach((group) => {
-  //   console.log(group.groups);
-  // });
-
-  // console.log(usersInGroup);
-  // console.log(usersInGroup[0].groups[0].users, req.session.user._id);
-  // let users = [...usersInGroup[0].groups[0].users];
-  // console.log(users);
-
-  // if (users.includes(req.session.id) === true) {
-  //   res.render("user/profilepage", {
-  //     user: req.session.user,
-  //     usersInGroup: usersInGroup[0].groups,
-  //   });
-  //   // }
-  // });
 });
 
 //GET Edit profile
