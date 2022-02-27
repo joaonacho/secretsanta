@@ -1,35 +1,38 @@
-<section id="sectionAuth">
-  <div class="box">
-    <div class="container">
-      <div class="form">
-        <h2>Sign Up</h2>
-        <form action="/auth/signup" method="POST" enctype="multipart/form-data">
-          <div class="input__box">
-            <input type="text" name="username" placeholder="Your name" />
-          </div>
-          <div class="input__box">
-            <input type="email" name="email" placeholder="Email" />
-          </div>
-          <div class="input__box">
-            <input type="password" name="password" placeholder="Password" />
-          </div>
-          <div class="input__box">
-            <input type="submit" value="Sign Up" />
-          </div>
-          <div class="input__box">
-            <label for="profileImg">Profile picture</label>
-            <input type="file" id="profileImg" name="profileImg" />
-          </div>
+<section class="sectionAuth">
+  <div class="containersignup">
+    <div class="form">
+      <h2>Sign Up</h2>
+      <form action="/auth/signup" method="POST" enctype="multipart/form-data">
+        <div class="input__box">
+          <input type="text" name="username" placeholder="Your name" />
+        </div>
+        <div class="input__box">
+          <input type="email" name="email" placeholder="Email" />
+        </div>
+        <div class="input__box">
+          <input type="password" name="password" placeholder="Password" />
+        </div>
+        <div class="input__box">
+          <input type="submit" value="Sign Up" />
+        </div>
+        <div class="input__box">
 
-          <p class="forget">Already registered?
-            <a href="/auth/login"> Log In</a></p>
-        </form>
-        {{#if errorMessage}}
+          <input
+            type="file"
+            id="profileImg"
+            name="profileImg"
+            placeholder="Password"
+          />
+        </div>
 
-          {{errorMessage}}
+        <p class="forget">Already registered?
+          <a href="/auth/login"> Log In</a></p>
+      </form>
+      {{#if errorMessage}}
 
-        {{/if}}
-      </div>
+        {{errorMessage}}
+
+      {{/if}}
     </div>
   </div>
 </section>

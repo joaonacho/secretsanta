@@ -1,29 +1,25 @@
 <section id="sectionAuth">
-  <div class="box">
-    <div class="container">
-      <div class="form">
-        <h2>Login Form</h2>
-        <form action="/auth/login" method="POST">
-          <div class="input__box">
-            <input type="email" name="email" placeholder="Email" />
-          </div>
-          <div class="input__box">
-            <input type="password" name="password" placeholder="Password" />
-          </div>
-          <div class="input__box">
-            <input type="submit" value="Login" />
-          </div>
-
-          {{#if errorMessage}}
-
-            {{errorMessage}}
-
-          {{/if}}
-
-          <p class="forget">Don't have an account?
-            <a href="/auth/signup"> Sign Up</a></p>
-        </form>
+  {{! <div class="container-login"> }}
+  <div class="container-form">
+    <h2>Login Form</h2>
+    <form action="/auth/login" method="POST">
+      <div class="input-box-white">
+        <input type="email" name="email" placeholder="Email" />
       </div>
-    </div>
+      <div class="input-box-white">
+        <input type="password" name="password" placeholder="Password" />
+      </div>
+      <div class="input-box-green">
+        <input type="submit" value="Login" />
+      </div>
+
+      {{#if errorMessage}}
+        {{errorMessage}}
+      {{/if}}
+
+      <p class="forget">Don't have an account?
+        <a href="/auth/signup"> Sign Up</a></p>
+    </form>
+    {{! </div> }}
   </div>
 </section>
