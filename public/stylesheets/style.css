@@ -64,7 +64,7 @@ h5,
   margin-top: 1.125rem;
   margin-bottom: 0rem;
 }
-p,
+/* p,
 ul,
 ol,
 pre,
@@ -72,7 +72,7 @@ table,
 blockquote {
   margin-top: 0rem;
   margin-bottom: 1.125rem;
-}
+} */
 ul ul,
 ol ol,
 ul ol,
@@ -119,20 +119,6 @@ nav {
   max-width: 100vw;
   /* border: 5px solid red; */
 }
-.container-landing {
-  text-align: center;
-  width: 80%;
-  max-width: 100vw;
-  padding: 5%;
-  border-radius: 10px;
-  backdrop-filter: blur(5px);
-  background: #fffafb9a;
-  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.158);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  border-right: 1px solid rgba(255, 255, 255, 0.2);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  border: 5px solid red;
-}
 /* #sectionAuth {
   display: flex;
   flex-wrap: wrap;
@@ -144,7 +130,8 @@ nav {
 } */
 #sectionProfile,
 #sectioncreategroup,
-#sectionAuth {
+#sectionAuth,
+#sectiongroup {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
@@ -152,18 +139,11 @@ nav {
   justify-content: space-evenly;
   min-height: 100vh;
   max-width: 100vw;
-  border: 5px solid blue;
-  /* border: 5px solid red; */
+  /* border: 5px solid blue; */
   padding: 15% 0;
 }
-
-.container-form {
+.my-container {
   margin-top: 5%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  /* max-height: 100%; */
   max-width: 90%;
   border-radius: 10px;
   backdrop-filter: blur(5px);
@@ -172,29 +152,29 @@ nav {
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-right: 1px solid rgba(255, 255, 255, 0.2);
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  border: 5px solid red;
-  width: 100%;
+  /* border: 5px solid red; */
+}
+.form {
+  justify-content: center;
+  text-align: center;
+  /* max-height: 100%; */
+  max-width: 90vw;
+  width: 90%;
   height: 100%;
   padding: 40px;
   position: relative;
 }
-/* .form {
-  width: 100%;
-  height: 100%;
-  padding: 40px;
-  position: relative;
-} */
-.container-form h2 {
+.form h2 {
   color: #090a0d;
-  font-size: 24px;
-  font-weight: 600;
+  /* font-size: 24px;
+  font-weight: 600; */
   position: relative;
   letter-spacing: 1px;
   margin-bottom: 40px;
   display: flex;
   justify-content: center;
 }
-.container-form h2::before {
+.form h2::before {
   width: 150px;
   height: 4px;
   content: "";
@@ -204,7 +184,7 @@ nav {
   display: flex;
   justify-content: center;
 }
-.container-form .input-box-white input {
+.form .input-box-white input {
   width: 100%;
   margin-bottom: 20px;
   display: flex;
@@ -212,7 +192,7 @@ nav {
   color: #090a0d;
   border: none;
   outline: none;
-  font-size: 16px;
+  /* font-size: 16px; */
   padding: 10px 20px;
   letter-spacing: 1px;
   border-radius: 35px;
@@ -222,40 +202,20 @@ nav {
   border-right: 1px solid rgba(255, 255, 255, 0.2);
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
-/* .form .input__box input {
-  width: 100%;
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-  color: #090a0d;
-  border: none;
-  outline: none;
-  font-size: 16px;
-  padding: 10px 20px;
-  letter-spacing: 1px;
-  border-radius: 35px;
-  background: rgba(255, 255, 255, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-  border-right: 1px solid rgba(255, 255, 255, 0.2);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-} */
-.container-form::placeholder {
+.form::placeholder {
   color: #090a0d;
 }
-.container-form .input-box-green input[type="submit"] {
-  width: 100%;
-  display: flex;
-  justify-content: center;
+.btn-green {
+  width: 250px;
   color: rgb(255, 255, 255);
   cursor: pointer;
   background: #114b5f;
-  max-width: 100px;
+  max-width: 90%;
   font-weight: 600;
   margin-bottom: 20px;
   border: none;
   outline: none;
-  font-size: 16px;
+  /* font-size: 16px; */
   padding: 10px 20px;
   letter-spacing: 1px;
   border-radius: 35px;
@@ -263,6 +223,12 @@ nav {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
   border-right: 1px solid rgba(255, 255, 255, 0.2);
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  margin-top: 5%;
+}
+.btn-green a {
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
 }
 .forget {
   color: #5c6273;
@@ -275,13 +241,9 @@ nav {
   font-weight: 600;
   text-decoration: none;
 }
-.input-box a {
+.signup {
   text-decoration: none;
-  color: rgb(255, 255, 255);
-  cursor: pointer;
-}
-a {
-  text-decoration: none;
+  font-weight: 600;
   color: #114b5f;
 }
 
@@ -298,12 +260,11 @@ a {
   border: 5px solid red;
   padding: 15% 0;
 } */
-.profilecontainer {
+.profile {
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  margin: 5% 2.5% 5% 5%;
+  margin: 5% 5% 2.5% 5%;
   width: 90%;
   border-radius: 10px;
   backdrop-filter: blur(5px);
@@ -314,6 +275,22 @@ a {
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   padding: 25px 15px 25px 15px;
   text-align: center;
+  /* border: 5px solid blue; */
+}
+.groupcontainer {
+  width: 90%;
+  height: 250px;
+  padding: 100px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  backdrop-filter: blur(5px);
+  background: #fffafb81;
+  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   /* border: 5px solid blue; */
 }
 .profileImg {
@@ -336,25 +313,9 @@ a {
   margin: 125% 0 0 75%;
   color: #114b5f;
 }
-.groupcontainer {
-  width: 90%;
-  height: 250px;
-  padding: 100px 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border-radius: 10px;
-  backdrop-filter: blur(5px);
-  background: #fffafb81;
-  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  border-right: 1px solid rgba(255, 255, 255, 0.2);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  /* border: 5px solid blue; */
-}
 .empty {
   /* border: 5px solid green; */
   width: 100%;
-  margin-bottom: 50px;
+  /* margin-bottom: 50px; */
   text-align: center;
 }
