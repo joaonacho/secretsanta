@@ -16,6 +16,11 @@
   <h4>Participants</h4>
   <ul>
     {{#each group.users}}
+      <img
+        src="{{this.profileImg}}"
+        alt="profile-picture"
+        style="width: 30px; border-radius: 50%"
+      />
       <li>{{this.username}}</li>
     {{/each}}
   </ul>
