@@ -3,6 +3,7 @@ const router = require("express").Router();
 // Require the User model in order to interact with the database
 const User = require("../models/User.model");
 const Group = require("../models/Group.model");
+const Comment = require("../models/Comment.model");
 
 //Cloudinary
 const fileUploader = require("../config/cloudinary.config");
@@ -68,6 +69,7 @@ router.get("/group/:id", (req, res) => {
 
   Group.findById(id)
     .populate("users")
+    .populate("comments")
     .then((group) => {
       const admin = group.admin.toString() === req.session.user._id;
       req.session.groupAdmin = group.admin.toString();
@@ -268,6 +270,24 @@ router.post("/shuffle/:groupId", (req, res, next) => {
         res.redirect(`/group/group/${groupId}`);
       });
     });
+});
+
+//POST Comments
+router.post("/comment/:groupId", (req, res, next) => {
+  const { groupId } = req.params;
+  const { content } = req.body;
+  let user = req.session.user.username;
+
+  Comment.create({ content, user }).then((comment) => {
+    let newComment = [comment];
+    Group.findByIdAndUpdate(
+      groupId,
+      { $push: { comments: newComment } },
+      { new: true }
+    ).then(() => {
+      res.redirect(`/group/group/${groupId}`);
+    });
+  });
 });
 
 module.exports = router;
