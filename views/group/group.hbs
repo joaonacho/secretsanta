@@ -14,7 +14,7 @@
   </div>
 
   <h4>Participants</h4>
-  <ul>
+  <ul class="text-center">
     {{#each group.users}}
       <img
         src="{{this.profileImg}}"
@@ -31,6 +31,16 @@
     <button> <a href="/group/shuffle/{{group._id}}">SHUFFLE</a></button>
   {{/if}}
 
+  <div>
+    {{#each group.comments}}
+      <div>
+        <h3 class="text-center">"{{this.content}}"</h3>
+        <p>{{this.date}}</p>
+        <p><i>{{this.user}}</i></p>
+      </div>
+    {{/each}}
+  </div>
+
   <form action="/group/comment/{{group._id}}" method="post">
     <fieldset>
       <label for="content">
@@ -45,15 +55,5 @@
     </fieldset>
     <button type="submit">Comment</button>
   </form>
-
-  <div>
-    {{#each group.comments}}
-      <div class="text-left">
-        <h3>"{{this.content}}"</h3>
-        <p>{{this.date}}</p>
-        <p><i>{{this.user}}</i></p>
-      </div>
-    {{/each}}
-  </div>
 
 </div>
