@@ -81,6 +81,10 @@ ol ul {
   margin-bottom: 0rem;
 }
 
+li {
+  list-style-type: none;
+}
+
 /* Let's make sure all's aligned */
 hr,
 .hr {

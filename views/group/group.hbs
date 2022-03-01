@@ -13,7 +13,12 @@
     <p>Gift price: {{group.price}}€</p>
   </div>
 
-  <h4>Participants</h4>
+  {{#if admin}}
+    <button class="btn-green">
+      <a href="/group/add/{{group._id}}">Add awesome friends</a></button>
+  {{/if}}
+
+  <h4>Participants:</h4>
   <ul class="text-center">
     {{#each group.users}}
       <img
@@ -26,8 +31,6 @@
   </ul>
 
   {{#if admin}}
-    <button class="btn-green">
-      <a href="/group/add/{{group._id}}">Add awesome friends</a></button>
     <button> <a href="/group/shuffle/{{group._id}}">SHUFFLE</a></button>
   {{/if}}
 
