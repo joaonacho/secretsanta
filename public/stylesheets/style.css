@@ -8,7 +8,10 @@
 }
 
 body {
-  background: linear-gradient(to bottom, #cee3e9, #fbfbff);
+  /* background: linear-gradient(to bottom, #cee3e9, #fbfbff); */
+  background-image: url("/images/1646150786758.png");
+  background-repeat: repeat;
+  background-size: contain;
   min-height: 100vh;
   max-width: 100vw;
 }
@@ -83,6 +86,11 @@ ol ul {
 
 li {
   list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+  color: #114b5f;
 }
 
 /* Let's make sure all's aligned */
