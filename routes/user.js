@@ -15,8 +15,8 @@ const isLoggedIn = require("../middleware/isLoggedIn");
 const { populate } = require("../models/User.model");
 
 //GET profile page
-router.get("/profile", isLoggedIn, (req, res, next) => {
-  const userId = req.session.user._id;
+router.get("/profile/:userId", isLoggedIn, (req, res, next) => {
+  const { userId } = req.params;
 
   User.findById(userId)
     .populate("groups")
@@ -65,7 +65,7 @@ router.post(
     )
       .then((updatedUser) => {
         req.session.user = updatedUser;
-        res.redirect("/user/profile");
+        res.redirect(`/user/profile/${id}`);
       })
       .catch((error) => {
         next(error);

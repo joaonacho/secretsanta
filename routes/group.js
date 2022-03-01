@@ -53,7 +53,7 @@ router.post(
               });
             })
             .then((user) => {
-              res.redirect("/user/profile");
+              res.redirect(`/user/profile/${admin}`);
             });
         }
       })
@@ -205,7 +205,7 @@ router.post("/group/delete/:id", (req, res, next) => {
 
   Group.findByIdAndDelete(id)
     .then(() => {
-      res.redirect("/user/profile");
+      res.redirect(`/user/profile/${req.session.user._id}`);
     })
     .catch((error) => {
       next(error);

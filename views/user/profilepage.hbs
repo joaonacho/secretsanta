@@ -30,8 +30,6 @@
 
   {{#if usersInGroup}}
     {{#each usersInGroup}}
-
-      <button> <a href="/group/creategroup">Create new group</a></button>
       <div class="card text-center" style="width: 18rem;">
         <img src="{{this.groupImg}}" class="card-img-top" alt="group_image" />
         <div class="card-body">
@@ -39,13 +37,14 @@
             <a href="/group/group/{{_id}}"> {{this.groupName}} </a></h2>
         </div>
       </div>
-
     {{/each}}
+
   {{else}}
     <div class="my-container profile">
       <p class="empty">You aren't in any group, yet. </p>
     </div>
   {{/if}}
+
   <button class="btn-green">
     <a class="btn-link-white" href="/group/creategroup">Create a group</a></button>
 </div>
