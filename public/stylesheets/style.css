@@ -78,6 +78,15 @@ ol ul {
   margin-bottom: 0rem;
 }
 
+li {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+  color: #114b5f;
+}
+
 /* Let's make sure all's aligned */
 hr,
 .hr {

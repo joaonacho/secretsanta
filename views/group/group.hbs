@@ -6,14 +6,21 @@
       style="width: 100%;"
     />
     <h2>{{group.groupName}}</h2>
+
     {{#if admin}}
       <button><a href="/group/group/edit/{{group._id}}">Edit Group </a></button>
     {{/if}}
+
     <p>{{group.description}}</p>
     <p>Gift price: {{group.price}}€</p>
   </div>
 
-  <h4>Participants</h4>
+  {{#if admin}}
+    <button class="btn-green">
+      <a href="/group/add/{{group._id}}">Add awesome friends</a></button>
+  {{/if}}
+
+  <h4>Participants:</h4>
   <ul class="text-center">
     {{#each group.users}}
       {{!-- <img
@@ -26,10 +33,20 @@
   </ul>
 
   {{#if admin}}
+<<<<<<< HEAD
     <button class="btn-green">
       <a href="/group/add/{{group._id}}">Add awesome friends</a></button>
     <button class="btn-green">
       <a href="/group/shuffle/{{group._id}}">SHUFFLE</a></button>
+=======
+
+    {{#if group.shuffled}}
+      <button> <a href="/group/shuffle/{{group._id}}">SHUFFLE</a></button>
+    {{else}}
+      <p>The group was shuffled!</p>
+    {{/if}}
+
+>>>>>>> 30becd96b0048b985be0277b6c3db708389df5fa
   {{/if}}
 
 </div>

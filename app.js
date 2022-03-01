@@ -29,6 +29,7 @@ app.use((req, res, next) => {
   if (res.locals.userIsConnected) {
     res.locals.username = req.session.user.username;
     res.locals.profileImg = req.session.user.profileImg;
+    res.locals._id = req.session.user._id;
   }
   next();
 });

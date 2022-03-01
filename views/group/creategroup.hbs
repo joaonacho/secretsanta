@@ -15,9 +15,15 @@
           name="description"
           placeholder="Description of the group"
         />
+
+        {{#if errorMessage}}
+          <p>{{errorMessage}}</p>
+        {{/if}}
+
       </div>
       <div class="input-box-white">
         <input
+          required
           type="number"
           name="price"
           placeholder="Select a maximum price"

@@ -53,7 +53,7 @@ router.post(
               });
             })
             .then((user) => {
-              res.redirect("/user/profile");
+              res.redirect(`/user/profile/${admin}`);
             });
         }
       })
@@ -121,7 +121,7 @@ router.post("/edit/:id", fileUploader.single("groupImg"), (req, res, next) => {
 });
 
 //GET add friends
-router.get("/add/:groupId", (req, res) => {
+router.get("/add/:groupId", isGroupAdmin, (req, res) => {
   const { groupId } = req.params;
 
   Group.findById(groupId)
@@ -191,7 +191,7 @@ router.post("/add/:groupId", (req, res, next) => {
 });
 
 //GET delete group
-router.get("/group/delete/:id", (req, res) => {
+router.get("/group/delete/:id", isGroupAdmin, (req, res) => {
   const { id } = req.params;
 
   Group.findById(id).then((groupDelete) => {
@@ -205,7 +205,7 @@ router.post("/group/delete/:id", (req, res, next) => {
 
   Group.findByIdAndDelete(id)
     .then(() => {
-      res.redirect("/user/profile");
+      res.redirect(`/user/profile/${req.session.user._id}`);
     })
     .catch((error) => {
       next(error);
@@ -213,7 +213,7 @@ router.post("/group/delete/:id", (req, res, next) => {
 });
 
 //Get Shuffle group
-router.get("/shuffle/:groupId", (req, res) => {
+router.get("/shuffle/:groupId", isGroupAdmin, (req, res) => {
   const { groupId } = req.params;
 
   Group.findById(groupId)
@@ -260,11 +260,11 @@ router.post("/shuffle/:groupId", (req, res, next) => {
 
       return idPairs;
     })
-    //Updating group pairs (works) & admin (gives error)
+    //Updating group pairs (works)
     .then((idPairs) => {
       Group.findByIdAndUpdate(
         groupId,
-        { $push: { pairs: idPairs } },
+        { $push: { pairs: idPairs }, shuffled: "" },
         { new: true }
       ).then(() => {
         res.redirect(`/group/group/${groupId}`);
