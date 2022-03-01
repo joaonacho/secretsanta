@@ -20,6 +20,7 @@ const groupSchema = new Schema({
     default: "/images/group-avatar.jpg",
   },
   pairs: [[{ type: Schema.Types.ObjectId, ref: "User" }]],
+  shuffled: { type: Boolean, default: true },
   //Bonus
   mySecretSanta: { type: Schema.Types.ObjectId, ref: "User" },
 });

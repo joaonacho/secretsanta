@@ -33,7 +33,11 @@
   </ul>
 
   {{#if admin}}
-    <button> <a href="/group/shuffle/{{group._id}}">SHUFFLE</a></button>
+
+    {{#if group.shuffled}}
+      <button> <a href="/group/shuffle/{{group._id}}">SHUFFLE</a></button>
+    {{/if}}
+
   {{/if}}
 
   <div>

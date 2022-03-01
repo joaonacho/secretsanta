@@ -260,11 +260,12 @@ router.post("/shuffle/:groupId", (req, res, next) => {
 
       return idPairs;
     })
-    //Updating group pairs (works) & admin (gives error)
+    //Updating group pairs (works)
     .then((idPairs) => {
       Group.findByIdAndUpdate(
         groupId,
         { $push: { pairs: idPairs } },
+        { shuffled: false },
         { new: true }
       ).then(() => {
         res.redirect(`/group/group/${groupId}`);
