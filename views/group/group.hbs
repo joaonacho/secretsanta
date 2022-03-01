@@ -6,9 +6,11 @@
       style="width: 100%;"
     />
     <h2>{{group.groupName}}</h2>
+
     {{#if admin}}
       <button><a href="/group/group/edit/{{group._id}}">Edit Group </a></button>
     {{/if}}
+
     <p>{{group.description}}</p>
     <p>Gift price: {{group.price}}€</p>
   </div>

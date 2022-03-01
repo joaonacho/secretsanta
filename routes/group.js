@@ -121,7 +121,7 @@ router.post("/edit/:id", fileUploader.single("groupImg"), (req, res, next) => {
 });
 
 //GET add friends
-router.get("/add/:groupId", (req, res) => {
+router.get("/add/:groupId", isGroupAdmin, (req, res) => {
   const { groupId } = req.params;
 
   Group.findById(groupId)
@@ -191,7 +191,7 @@ router.post("/add/:groupId", (req, res, next) => {
 });
 
 //GET delete group
-router.get("/group/delete/:id", (req, res) => {
+router.get("/group/delete/:id", isGroupAdmin, (req, res) => {
   const { id } = req.params;
 
   Group.findById(id).then((groupDelete) => {
@@ -213,7 +213,7 @@ router.post("/group/delete/:id", (req, res, next) => {
 });
 
 //Get Shuffle group
-router.get("/shuffle/:groupId", (req, res) => {
+router.get("/shuffle/:groupId", isGroupAdmin, (req, res) => {
   const { groupId } = req.params;
 
   Group.findById(groupId)
