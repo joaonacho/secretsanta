@@ -117,7 +117,8 @@ nav {
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
 }
 #backgroundImage {
-  background: url("/images/pexels-helena-lopes-708440.jpg");
+  /* background: url("/images/pexels-helena-lopes-708440.jpg"); */
+  background-image: url("/images/11.png");
   background-repeat: no-repeat;
   background-size: cover;
   background-position-y: 80%;
