@@ -20,11 +20,11 @@ const groupSchema = new Schema({
     default: "/images/group-avatar.jpg",
   },
   pairs: [[{ type: Schema.Types.ObjectId, ref: "User" }]],
-  shuffled: { type: Boolean, default: true },
+  shuffled: { type: String, default: "not shuffled" },
   //Bonus
   mySecretSanta: { type: Schema.Types.ObjectId, ref: "User" },
 });
 
 const Group = model("Group", groupSchema);
-//O Jhonny não percebe nada disto
+
 module.exports = Group;

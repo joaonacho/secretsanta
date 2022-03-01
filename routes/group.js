@@ -264,8 +264,7 @@ router.post("/shuffle/:groupId", (req, res, next) => {
     .then((idPairs) => {
       Group.findByIdAndUpdate(
         groupId,
-        { $push: { pairs: idPairs } },
-        { shuffled: false },
+        { $push: { pairs: idPairs }, shuffled: "" },
         { new: true }
       ).then(() => {
         res.redirect(`/group/group/${groupId}`);
