@@ -1,43 +1,36 @@
-<h1>Edit Profile</h1>
+<div class="canva">
+  <div class="box-glass container-form">
+    <h2>Edit Profile</h2>
+    <form
+      action="/user/profile/edit/{{user._id}}"
+      method="POST"
+      enctype="multipart/form-data"
+    >
+      <fieldset class="input-box-white">
+        <input
+          type="text"
+          name="username"
+          id="username"
+          value="{{user.username}}"
+        />
 
-<form
-  action="/user/profile/edit/{{user._id}}"
-  method="POST"
-  enctype="multipart/form-data"
->
+      </fieldset>
+      <fieldset class="input-box-white">
+        <textarea
+          name="interests"
+          id="interests"
+          cols="30"
+          rows="5"
+        >{{user.interests}}</textarea>
+      </fieldset>
+      <fieldset class="input-box-white">
+        <input type="file" id="profileImg" name="profileImg" />
+      </fieldset>
+      {{#if errorMessage}}
+        {{errorMessage}}
+      {{/if}}
+      <button class="btn-green-small" type="submit">Save changes</button>
+    </form>
+  </div>
 
-  <fieldset>
-    <label for="username">
-      Username
-      <input
-        type="text"
-        name="username"
-        id="username"
-        value="{{user.username}}"
-      />
-    </label>
-  </fieldset>
-
-  <fieldset>
-    <label for="interests">
-      Interests
-    </label>
-    <textarea
-      name="interests"
-      id="interests"
-      cols="30"
-      rows="5"
-    >{{user.interests}}</textarea>
-  </fieldset>
-
-  <fieldset>
-    <label for="profileImg">Profile picture</label>
-    <input type="file" id="profileImg" name="profileImg" />
-  </fieldset>
-
-  <button type="submit">Save changes</button>
-</form>
-
-{{#if errorMessage}}
-  {{errorMessage}}
-{{/if}}
+</div>

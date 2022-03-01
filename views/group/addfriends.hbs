@@ -1,16 +1,4 @@
-<h1>Add friends</h1>
-
-<button><a href="/group/group/{{group._id}}">back</a></button>
-
-<h1>{{group.groupName}}</h1>
-
-<ul>Friends in the group:
-  {{#each group.users}}
-    <li>{{this.username}}</li>
-  {{/each}}
-</ul>
-
-<form action="/group/add/{{group._id}}" method="post">
+{{!-- <form action="/group/add/{{group._id}}" method="post">
   <fieldset>
     <label for="users">
       Friends name:
@@ -21,4 +9,39 @@
   </fieldset>
 
   <button type="submit">Add friends</button>
-</form>
+</form> --}}
+
+<section id="sectionaddfriends">
+  <div class="my-container">
+    <img
+      src="{{group.groupImg}}"
+      alt="group_cover_image"
+      style="width: 100%;"
+    />
+    <h1>{{group.groupName}}</h1>
+    <ul>Friends in the group:
+      {{#each group.users}}
+        <li>{{this.username}}</li>
+      {{/each}}
+    </ul>
+  </div>
+
+  {{! <div class="container-login"> }}
+  <div class="my-container form">
+    <h3>Add Friend</h3>
+    <form action="/group/add/{{group._id}}" method="post">
+      <div class="input-box-white">
+        <input required type="email" name="email" placeholder="Email" />
+      </div>
+      <div class="input-box-white">
+        <input required type="text" name="name" placeholder="Name" />
+      </div>
+      <div>
+        <input class="btn-green" type="submit" value="Add friend" />
+      </div>
+    </form>
+    {{#if errorMessage}}
+      {{errorMessage}}
+    {{/if}}
+  </div>
+</section>

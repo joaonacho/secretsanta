@@ -28,24 +28,24 @@
     <h5>{{user.interests}}</h5>
   </div>
 
-  {{#if usersInGroup}}
-    {{#each usersInGroup}}
-
-      <button> <a href="/group/creategroup">Create new group</a></button>
-      <div class="card text-center" style="width: 18rem;">
-        <img src="{{this.groupImg}}" class="card-img-top" alt="group_image" />
-        <div class="card-body">
-          <h2 class="card-text">
-            <a href="/group/group/{{_id}}"> {{this.groupName}} </a></h2>
+  <div class="box-glass container-groups-wrap">
+    {{#if usersInGroup}}
+      {{#each usersInGroup}}
+        <div class="box-glass-group" style="width: 7rem;">
+          <img src="{{this.groupImg}}" class="card-img-top" alt="group_image" />
+          <div class="card-body">
+            <h5>
+              <a href="/group/group/{{_id}}"> {{this.groupName}} </a></h5>
+          </div>
         </div>
+      {{/each}}
+    {{else}}
+      <div class="my-container profile">
+        <p class="empty">You aren't in any group, yet. </p>
       </div>
+    {{/if}}
+  </div>
 
-    {{/each}}
-  {{else}}
-    <div class="my-container profile">
-      <p class="empty">You aren't in any group, yet. </p>
-    </div>
-  {{/if}}
   <button class="btn-green">
     <a class="btn-link-white" href="/group/creategroup">Create a group</a></button>
 </div>

@@ -16,11 +16,11 @@
   <h4>Participants</h4>
   <ul class="text-center">
     {{#each group.users}}
-      <img
+      {{!-- <img
         src="{{this.profileImg}}"
         alt="profile-picture"
         style="width: 30px; border-radius: 50%"
-      />
+      /> --}}
       <li>{{this.username}}</li>
     {{/each}}
   </ul>
@@ -28,10 +28,13 @@
   {{#if admin}}
     <button class="btn-green">
       <a href="/group/add/{{group._id}}">Add awesome friends</a></button>
-    <button> <a href="/group/shuffle/{{group._id}}">SHUFFLE</a></button>
+    <button class="btn-green">
+      <a href="/group/shuffle/{{group._id}}">SHUFFLE</a></button>
   {{/if}}
 
-  <div>
+</div>
+
+{{!-- <div>
     {{#each group.comments}}
       <div>
         <h3 class="text-center">"{{this.content}}"</h3>
@@ -39,9 +42,9 @@
         <p><i>{{this.user}}</i></p>
       </div>
     {{/each}}
-  </div>
+  </div> --}}
 
-  <form action="/group/comment/{{group._id}}" method="post">
+{{!-- <form action="/group/comment/{{group._id}}" method="post">
     <fieldset>
       <label for="content">
         <textarea
@@ -54,6 +57,45 @@
       </label>
     </fieldset>
     <button type="submit">Comment</button>
-  </form>
+  </form> --}}
 
+<div id="commentsgroup">
+
+  <div class="d-flex justify-content-center pt-3 pb-2">
+    <form action="/group/comment/{{group._id}}" method="post">
+      <fieldset>
+        <label for="content">
+          <textarea
+            name="content"
+            id="content"
+            cols="50"
+            rows="2"
+            placeholder="Comment here..."
+            class="form-control addtxt"
+          ></textarea>
+        </label>
+      </fieldset>
+      <button type="submit">Comment</button>
+    </form>
+  </div>
+
+<div class="my-container-comments-principal">
+{{#each group.comments}}
+ <div class="my-container-comments">
+
+    <p>"{{this.content}}"</p>
+    <div class="d-flex justify-content-between">
+      <div >
+        <img src="https://i.imgur.com/AgAC1Is.jpg" width="18" />
+        <p>{{this.user}}</p>
+      </div>
+    </div>
+    {{!-- <p>{{this.date}}</p> --}}
+    {{!-- <p><i>{{this.user}}</i></p> --}}
+
+  </div>
+{{/each}}
 </div>
+  </div>
+  </div>
+ 
