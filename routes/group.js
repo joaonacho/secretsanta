@@ -157,7 +157,7 @@ router.post("/add/:groupId", (req, res, next) => {
         });
       }
       // if found and is not in the group, just update
-      if (userFound && group.includes(userFound.id) === false) {
+      if (userFound && group.includes(userFound._id) === false) {
         return User.findOneAndUpdate(
           { email },
           { $push: { groups: groupId } },
