@@ -40,6 +40,13 @@
 
   {{#if admin}}
 
+
+<form action="/group/sendemail/{{group._id}}" method="post">
+
+<button type="submit">Send emails</button>
+
+</form>
+
 {{!-- UNCOMMENT LATER ---------------- --}}
     {{!-- {{#if group.shuffled}} --}}
       <button> <a href="/group/shuffle/{{group._id}}">SHUFFLE</a></button>

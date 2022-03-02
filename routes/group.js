@@ -112,7 +112,7 @@ router.post("/edit/:id", fileUploader.single("groupImg"), (req, res, next) => {
     },
     { new: true }
   )
-    .then((updatedGroup) => {
+    .then(() => {
       res.redirect(`/group/group/${id}`);
     })
     .catch((error) => {
@@ -264,7 +264,7 @@ router.post("/shuffle/:groupId", (req, res, next) => {
     .then((idPairs) => {
       Group.findByIdAndUpdate(
         groupId,
-        { $push: { pairs: idPairs }, shuffled: "" },
+        { $push: { pairs: idPairs }, $set: { shuffled: "" } },
         { new: true }
       ).then(() => {
         console.log("Shuffle success");
@@ -277,6 +277,20 @@ router.post("/shuffle/:groupId", (req, res, next) => {
   //       console.log(groupPairs.pairs);
   //     });
   // });
+
+  res.redirect(`/group/group/${groupId}`);
+});
+
+//POST send email
+router.post("/sendemail/:groupId", (req, res, next) => {
+  const { groupId } = req.params;
+
+  Group.findById(groupId)
+    .populate(["pairs"])
+    .then((groupPairs) => {
+      console.log(groupPairs);
+    });
+  res.redirect(`/group/group/${groupId}`);
   // let transporter = nodemailer.createTransport({
   //   service: "Gmail",
   //   auth: {
@@ -291,11 +305,7 @@ router.post("/shuffle/:groupId", (req, res, next) => {
   //   text: message,
   //   html: `<b>${message}</b>`,
   // });
-  res.redirect(`/group/group/${groupId}`);
 });
-
-//POST send email
-// router.post("/group/:groupId", (req, res, next));
 
 //POST Comments
 router.post("/comment/:groupId", (req, res, next) => {
