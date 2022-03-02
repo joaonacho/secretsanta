@@ -1,0 +1,23 @@
+<div id="sectionProfile">
+  <div class="my-container profile">
+    <img class="profileImg" src="{{userFound.profileImg}}" />
+
+    <div class="nameProfile">
+      <h3 class="">{{userFound.username}}</h3>
+
+    </div>
+    <h5>{{userFound.interests}}</h5>
+  </div>
+
+  <div class="box-glass container-groups-wrap">
+    {{#each userFound.groups}}
+      <div class="box-glass-group" style="width: 7rem;">
+        <img src="{{groupImg}}" class="card-img-top" alt="group_image" />
+        <div class="card-body">
+          <h5>
+            {{groupName}}</h5>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+</div>

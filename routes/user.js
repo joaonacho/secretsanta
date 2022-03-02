@@ -73,4 +73,15 @@ router.post(
   }
 );
 
+//GET view profile
+router.get("/view/profile/:userId", (req, res) => {
+  const { userId } = req.params;
+
+  User.findById(userId)
+    .populate("groups")
+    .then((userFound) => {
+      res.render("user/viewprofile", { userFound });
+    });
+});
+
 module.exports = router;

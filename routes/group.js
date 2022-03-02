@@ -1,5 +1,5 @@
 const router = require("express").Router();
-
+const nodemailer = require("nodemailer");
 // Require the User model in order to interact with the database
 const User = require("../models/User.model");
 const Group = require("../models/Group.model");
@@ -157,7 +157,7 @@ router.post("/add/:groupId", (req, res, next) => {
         });
       }
       // if found and is not in the group, just update
-      if (userFound && group.includes(userFound.id) === false) {
+      if (userFound && group.includes(userFound._id) === false) {
         return User.findOneAndUpdate(
           { email },
           { $push: { groups: groupId } },
@@ -267,10 +267,35 @@ router.post("/shuffle/:groupId", (req, res, next) => {
         { $push: { pairs: idPairs }, shuffled: "" },
         { new: true }
       ).then(() => {
-        res.redirect(`/group/group/${groupId}`);
+        console.log("Shuffle success");
       });
     });
+  // .then(() => {
+  //   Group.findById(groupId)
+  //     // .populate("pairs")
+  //     .then((groupPairs) => {
+  //       console.log(groupPairs.pairs);
+  //     });
+  // });
+  // let transporter = nodemailer.createTransport({
+  //   service: "Gmail",
+  //   auth: {
+  //     user: "webstie.2022@gmail.com",
+  //     pass: "Web.Bestie2022",
+  //   },
+  // });
+  // transporter.sendMail({
+  //   from: '"Webstie" <web.bestie2022@gmail.com>',
+  //   // to: email,
+  //   subject: subject,
+  //   text: message,
+  //   html: `<b>${message}</b>`,
+  // });
+  res.redirect(`/group/group/${groupId}`);
 });
+
+//POST send email
+// router.post("/group/:groupId", (req, res, next));
 
 //POST Comments
 router.post("/comment/:groupId", (req, res, next) => {
@@ -278,8 +303,12 @@ router.post("/comment/:groupId", (req, res, next) => {
   const { content } = req.body;
   let user = req.session.user.username;
 
-  Comment.create({ content, user }).then((comment) => {
+  const currentDate = new Date();
+  const date = currentDate.toLocaleString();
+
+  Comment.create({ content, user, date }).then((comment) => {
     let newComment = [comment];
+
     Group.findByIdAndUpdate(
       groupId,
       { $push: { comments: newComment } },
