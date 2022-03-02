@@ -4,10 +4,7 @@ const commentSchema = new Schema(
   {
     content: String,
     user: String,
-    date: {
-      type: Date,
-      default: Date.now,
-    },
+    date: String,
   },
   {
     timestamps: true,

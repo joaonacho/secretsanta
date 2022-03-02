@@ -77,7 +77,25 @@
 
 <div id="commentsgroup">
 
-  <div class="d-flex justify-content-center pt-3 pb-2">
+
+<div class="my-container-comments-principal">
+{{#each group.comments}}
+ <div class="my-container-comments">
+
+    <p>"{{this.content}}"</p>
+    <div class="d-flex justify-content-between">
+      <div>
+        <p><i>{{this.user}}</i></p>
+        <p><i>{{this.date}}</i></p>
+      </div>
+    </div>
+    {{!-- <p>{{this.date}}</p> --}}
+    {{!-- <p><i>{{this.user}}</i></p> --}}
+  </div>
+{{/each}}
+</div>
+
+<div class="d-flex justify-content-center pt-3 pb-2">
     <form action="/group/comment/{{group._id}}" method="post">
       <fieldset>
         <label for="content">
@@ -92,28 +110,10 @@
         </label>
       </fieldset>
 
-    
       <button type="submit" class="btn-green">Comment</button>
     </form>
   </div>
 
-<div class="my-container-comments-principal">
-{{#each group.comments}}
- <div class="my-container-comments">
-
-    <p>"{{this.content}}"</p>
-    <div class="d-flex justify-content-between">
-      <div>
-        <img src="https://i.imgur.com/AgAC1Is.jpg" width="18" />
-        <p><i>{{this.user}}</i></p>
-      </div>
-    </div>
-    {{!-- <p>{{this.date}}</p> --}}
-    {{!-- <p><i>{{this.user}}</i></p> --}}
-
-  </div>
-{{/each}}
-</div>
   </div>
   </div>
  

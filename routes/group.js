@@ -278,8 +278,14 @@ router.post("/comment/:groupId", (req, res, next) => {
   const { content } = req.body;
   let user = req.session.user.username;
 
-  Comment.create({ content, user }).then((comment) => {
+  const currentDate = new Date();
+  const date = currentDate.toLocaleString();
+
+  Comment.create({ content, user, date }).then((comment) => {
     let newComment = [comment];
+
+    console.log(newComment[0]);
+
     Group.findByIdAndUpdate(
       groupId,
       { $push: { comments: newComment } },
