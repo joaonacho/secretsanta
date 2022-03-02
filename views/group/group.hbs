@@ -21,7 +21,7 @@
 
     <button class="btn-green">
       <a href="/group/add/{{group._id}}">Add awesome friends</a></button>
-      
+
       {{/if}}
 
   {{/if}}
@@ -34,7 +34,7 @@
         alt="profile-picture"
         style="width: 30px; border-radius: 50%"
       /> --}}
-      <li>{{this.username}}</li>
+      <li><a href="/user/view/profile/{{this._id}}">{{this.username}}</a></li>
     {{/each}}
   </ul>
 
@@ -91,7 +91,9 @@
           ></textarea>
         </label>
       </fieldset>
-      <button type="submit">Comment</button>
+
+    
+      <button type="submit" class="btn-green">Comment</button>
     </form>
   </div>
 
@@ -101,9 +103,9 @@
 
     <p>"{{this.content}}"</p>
     <div class="d-flex justify-content-between">
-      <div >
+      <div>
         <img src="https://i.imgur.com/AgAC1Is.jpg" width="18" />
-        <p>{{this.user}}</p>
+        <p><i>{{this.user}}</i></p>
       </div>
     </div>
     {{!-- <p>{{this.date}}</p> --}}
