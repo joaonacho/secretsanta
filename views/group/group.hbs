@@ -16,8 +16,14 @@
   </div>
 
   {{#if admin}}
+
+      {{#if group.shuffled}}
+
     <button class="btn-green">
       <a href="/group/add/{{group._id}}">Add awesome friends</a></button>
+      
+      {{/if}}
+
   {{/if}}
 
   <h4>Participants:</h4>

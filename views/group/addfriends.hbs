@@ -31,10 +31,26 @@
     <h3>Add Friend</h3>
     <form action="/group/add/{{group._id}}" method="post">
       <div class="input-box-white">
-        <input required type="email" name="email" placeholder="Email" />
+        <label for="email">
+          <input
+            required
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Email"
+          />
+        </label>
       </div>
       <div class="input-box-white">
-        <input required type="text" name="name" placeholder="Name" />
+        <label for="users">
+          <input
+            required
+            type="text"
+            name="users"
+            id="users"
+            placeholder="Name"
+          />
+        </label>
       </div>
       <div>
         <input class="btn-green" type="submit" value="Add friend" />
