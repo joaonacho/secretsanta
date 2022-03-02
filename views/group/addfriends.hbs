@@ -18,7 +18,7 @@
       alt="group_cover_image"
       style="width: 100%;"
     />
-    <h1>{{group.groupName}}</h1>
+    <h1><a href="/group/group/{{group._id}}"> {{group.groupName}}</a></h1>
     <ul>Friends in the group:
       {{#each group.users}}
         <li>{{this.username}}</li>
