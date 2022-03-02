@@ -284,8 +284,6 @@ router.post("/comment/:groupId", (req, res, next) => {
   Comment.create({ content, user, date }).then((comment) => {
     let newComment = [comment];
 
-    console.log(newComment[0]);
-
     Group.findByIdAndUpdate(
       groupId,
       { $push: { comments: newComment } },
