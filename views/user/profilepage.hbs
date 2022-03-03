@@ -1,5 +1,5 @@
-<div id="sectionProfile">
-  <div class="my-container profile">
+<div class="canva">
+  <div class="box-glass container-profile">
     <img class="profileImg" src="{{user.profileImg}}" />
 
     <div class="nameProfile">
@@ -31,17 +31,18 @@
   <div class="box-glass container-groups-wrap">
     {{#if usersInGroup}}
       {{#each usersInGroup}}
-        <div class="box-glass-group" style="width: 7rem;">
+        <div class="box-glass-group" style="width: 10rem;">
           <img src="{{this.groupImg}}" class="card-img-top" alt="group_image" />
           <div class="card-body">
-            <h5>
-              <a href="/group/group/{{_id}}"> {{this.groupName}} </a></h5>
+            <h3 class="text-center">
+              <a href="/group/group/{{_id}}"> {{this.groupName}} </a></h3>
           </div>
         </div>
       {{/each}}
     {{else}}
 
-      <p class="empty">You aren't in any group, yet. </p>
+      <p class="empty container-groups-wrap">You aren't in any group, yet.
+      </p>
 
     {{/if}}
   </div>

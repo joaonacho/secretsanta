@@ -1,57 +1,51 @@
-<h1>Edit group page</h1>
+<div class="canva">
+  <div class="box-glass container-form">
+    <form
+      action="/group/edit/{{group._id}}"
+      method="post"
+      enctype="multipart/form-data"
+    >
+      <fieldset class="input-box-white">
+        <input
+          required
+          type="text"
+          id="groupName"
+          name="groupName"
+          value="{{group.groupName}}"
+        />
+      </fieldset>
 
-<form
-  action="/group/edit/{{group._id}}"
-  method="post"
-  enctype="multipart/form-data"
->
-  <fieldset>
-    <label for="groupName">
-      Group name
-    </label>
-    <input
-      required
-      type="text"
-      id="groupName"
-      name="groupName"
-      value="{{group.groupName}}"
-    />
-  </fieldset>
+      <fieldset class="input-box-white">
 
-  <fieldset>
-    <label for="description">
-      Description
-    </label>
-    <textarea
-      name="description"
-      id="description"
-      cols="50"
-      rows="4"
-    >{{group.description}}</textarea>
-  </fieldset>
+        <textarea
+          name="description"
+          id="description"
+          class="interests"
+          cols="50"
+          rows="4"
+        >{{group.description}}</textarea>
+      </fieldset>
 
-  <fieldset>
-    <label for="price">
-      Gift price limit
-    </label>
-    <input
-      required
-      type="number"
-      id="price"
-      name="price"
-      min="1"
-      value="{{group.price}}"
-    />
-  </fieldset>
+      <fieldset class="input-box-white">
+        <input
+          required
+          type="number"
+          id="price"
+          name="price"
+          min="1"
+          value="{{group.price}}"
+        />
+      </fieldset>
 
-  <fieldset>
-    <label for="groupImg">
-      Update image
-    </label>
-    <input type="file" id="groupImg" name="groupImg" />
-  </fieldset>
+      <fieldset class="input-box-white">
+        <input type="file" id="groupImg" name="groupImg" />
+      </fieldset>
 
-  <button type="submit">Save changes</button>
-</form>
+      <button type="submit">Save changes</button>
+    </form>
 
-<button> <a href="/group/group/delete/{{group._id}}"> Delete group</a></button>
+    <button>
+      <a href="/group/group/delete/{{group._id}}"> Delete group</a></button>
+  </div>
+
+</div>

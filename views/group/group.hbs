@@ -1,28 +1,50 @@
-<div id="sectiongroup">
-  <div class="my-container">
+<div class="canva">
+  <div class="box-glass container-flex-center">
     <img
       src="{{group.groupImg}}"
       alt="group_cover_image"
       style="width: 100%;"
     />
-    <h2>{{group.groupName}}</h2>
+    <div class="nameProfile">
+      <h2 class="">{{group.groupName}}</h2>
+      {{#if admin}}
+        <a href="/group/group/edit/{{group._id}}">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="64"
+            height="64"
+            fill="currentColor"
+            class="bi bi-pencil-square edit-icon-large"
+            viewBox="-10 -15 40 40"
+          >
+            <path
+              d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+            ></path>
+            <path
+              fill-rule="evenodd"
+              d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
+            ></path>
+          </svg>
+        </a>
+      {{/if}}
+    </div>
 
-    {{#if admin}}
+    {{!-- {{#if admin}}
       <button><a href="/group/group/edit/{{group._id}}">Edit Group </a></button>
-    {{/if}}
+    {{/if}} --}}
 
-    <p>{{group.description}}</p>
-    <p>Gift price: {{group.price}}€</p>
+    <h5>{{group.description}}</h5>
+    <h3>Gift price: {{group.price}}€</h3>
   </div>
 
   {{#if admin}}
 
-      {{#if group.shuffled}}
+    {{#if group.shuffled}}
 
-    <button class="btn-green">
-      <a href="/group/add/{{group._id}}">Add awesome friends</a></button>
+      <button class="btn-green">
+        <a href="/group/add/{{group._id}}">Add awesome friends</a></button>
 
-      {{/if}}
+    {{/if}}
 
   {{/if}}
 
@@ -48,17 +70,17 @@
 </form>
 
 {{!-- UNCOMMENT LATER ---------------- --}}
-    {{!-- {{#if group.shuffled}} --}}
-      <button> <a href="/group/shuffle/{{group._id}}">SHUFFLE</a></button>
-    {{else}}
+  {{!-- {{#if group.shuffled}} --}}
+  <button> <a href="/group/shuffle/{{group._id}}">SHUFFLE</a></button>
+  {{!-- {{else}}
       <p>The group was shuffled!</p>
     {{/if}}
 
-  {{/if}} --}}
+  {{/if}}  --}}
 
-</div>
+  {{! </div>  }}
 
-{{!-- <div>
+  {{!-- <div>
     {{#each group.comments}}
       <div>
         <h3 class="text-center">"{{this.content}}"</h3>
@@ -68,7 +90,7 @@
     {{/each}}
   </div> --}}
 
-{{!-- <form action="/group/comment/{{group._id}}" method="post">
+  {{!-- <form action="/group/comment/{{group._id}}" method="post">
     <fieldset>
       <label for="content">
         <textarea
@@ -83,44 +105,54 @@
     <button type="submit">Comment</button>
   </form> --}}
 
-<div id="commentsgroup">
+  <div id="commentsgroup">
 
+    <div class="my-container-comments-principal">
+      {{#each group.comments}}
+        <div class="my-container-comments">
+          <p>"{{this.content}}"</p>
+          <div class="d-flex justify-content-between">
+            <div class="text-start">
+              <p><i>{{this.user}}</i></p>
+              <p><i>{{this.date}}</i></p>
+            </div>
+          </div>
+          {{!-- <p>{{this.date}}</p> --}}
+          {{!-- <p><i>{{this.user}}</i></p> --}}
+        </div>
+      {{/each}}
+    </div>
 
-<div class="my-container-comments-principal">
-{{#each group.comments}}
- <div class="my-container-comments">
-    <p>"{{this.content}}"</p>
-    <div class="d-flex justify-content-between">
-      <div class="text-start">
-        <p><i>{{this.user}}</i></p>
-        <p><i>{{this.date}}</i></p>
+    
+    <div class="container">
+  <div class="dialogbox">
+    <div class="body">
+      <span class="tip tip-up"></span>
+      <div class="message">
+        <span>I just made a comment about this comment box which is purely made from CSS.</span>
       </div>
     </div>
-    {{!-- <p>{{this.date}}</p> --}}
-    {{!-- <p><i>{{this.user}}</i></p> --}}
   </div>
-{{/each}}
+    
+    
+    <div class="d-flex justify-content-center pt-3 pb-2">
+      <form action="/group/comment/{{group._id}}" method="post">
+        <fieldset>
+          <label for="content">
+            <textarea
+              name="content"
+              id="content"
+              cols="50"
+              rows="2"
+              placeholder="Comment here..."
+              class="form-control addtxt"
+            ></textarea>
+          </label>
+        </fieldset>
+
+        <button type="submit" class="btn-green">Comment</button>
+      </form>
+    </div>
+
+  </div>
 </div>
-
-<div class="d-flex justify-content-center pt-3 pb-2">
-    <form action="/group/comment/{{group._id}}" method="post">
-      <fieldset>
-        <label for="content">
-          <textarea
-            name="content"
-            id="content"
-            cols="50"
-            rows="2"
-            placeholder="Comment here..."
-            class="form-control addtxt"
-          ></textarea>
-        </label>
-      </fieldset>
-
-      <button type="submit" class="btn-green">Comment</button>
-    </form>
-  </div>
-
-  </div>
-  </div>
- 
