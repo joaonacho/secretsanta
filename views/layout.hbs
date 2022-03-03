@@ -18,7 +18,7 @@
 
     <nav class="navbar navbar-light bg-light fixed-top">
       <div class="container-fluid">
-        <a class="navbar-brand" href="/">Mistery Friend</a>
+        <a class="navbar-brand" href="/">Webstie</a>
         {{#if userIsConnected}}
         <button
           class="navbar-toggler"
@@ -44,8 +44,9 @@
               aria-label="Close"
             ></button>
           </div>
-          <div class="offcanvas-body">
-            <img src="{{profileImg}}" alt="profile-image" style="width: 20%; border-radius: 50%">
+          <div class="offcanvas-body"> 
+            <a href="/user/profile/edit/{{_id}}">
+            <img src="{{profileImg}}" alt="profile-image" style="width: 20%; border-radius: 50%"></a>
             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="/user/profile/{{_id}}">Profile</a>

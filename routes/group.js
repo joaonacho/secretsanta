@@ -297,7 +297,7 @@ router.post("/sendemail/:groupId", (req, res, next) => {
       let usernames = pairUsername.slice(1, pairUsername.length);
       let uniqueUsername = [...new Set([...usernames])];
 
-      const message = `Hello, your secret friend`;
+      const message = `Hello, your webstie`;
 
       let transporter = nodemailer.createTransport({
         service: "Gmail",
@@ -314,15 +314,14 @@ router.post("/sendemail/:groupId", (req, res, next) => {
           subject: "Find who is your secret friend!",
           text: message,
           html: `
-          <h1>Hello from Webstie!</h1>
-          <h3>your web bestie ;)</h3>
-          
-          
-          <b>${message} is ${uniqueUsername[index]}</b>
+          <h1 style="align-text: center;">Hello from Webstie!</h1>          
+
+          <p style="align-text: center;"><b>${message} is ${uniqueUsername[index]}</b></p>
           `,
         });
       });
     });
+
   res.redirect(`/group/group/${groupId}`);
 });
 
