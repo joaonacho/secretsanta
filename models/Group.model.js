@@ -19,7 +19,7 @@ const groupSchema = new Schema({
     type: String,
     default: "/images/group-avatar.jpg",
   },
-  pairs: [[{ type: Schema.Types.ObjectId, ref: "User" }]],
+  pairs: [{ type: Schema.Types.ObjectId, ref: "User" }],
   shuffled: { type: String, default: "not shuffled" },
   //Bonus
   mySecretSanta: { type: Schema.Types.ObjectId, ref: "User" },

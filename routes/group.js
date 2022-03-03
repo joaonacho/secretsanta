@@ -252,9 +252,9 @@ router.post("/shuffle/:groupId", (req, res, next) => {
       let idPairs = [];
       for (let i = 0; i < userId.length; i++) {
         if (i === userId.length - 1) {
-          idPairs.push([userId[i], userId[0]]);
+          idPairs.push(userId[i], userId[0]);
         } else {
-          idPairs.push([userId[i], userId[i + 1]]);
+          idPairs.push(userId[i], userId[i + 1]);
         }
       }
 
@@ -264,7 +264,7 @@ router.post("/shuffle/:groupId", (req, res, next) => {
     .then((idPairs) => {
       Group.findByIdAndUpdate(
         groupId,
-        { $push: { pairs: idPairs }, $set: { shuffled: "" } },
+        { $push: { pairs: idPairs }, shuffled: "" },
         { new: true }
       ).then(() => {
         console.log("Shuffle success");
@@ -274,7 +274,7 @@ router.post("/shuffle/:groupId", (req, res, next) => {
   //   Group.findById(groupId)
   //     // .populate("pairs")
   //     .then((groupPairs) => {
-  //       console.log(groupPairs.pairs);
+  //       console.log(groupPairs);
   //     });
   // });
 
@@ -286,9 +286,22 @@ router.post("/sendemail/:groupId", (req, res, next) => {
   const { groupId } = req.params;
 
   Group.findById(groupId)
-    .populate(["pairs"])
+    .populate("pairs")
     .then((groupPairs) => {
-      console.log(groupPairs);
+      let pairs = groupPairs.pairs;
+      let pairEmails = [];
+      let pairUsername = [];
+
+      pairs.forEach((email) => {
+        pairEmails.push(email.email);
+      });
+
+      pairs.forEach((username) => {
+        pairUsername.push(username.username);
+      });
+
+      console.log(pairEmails);
+      console.log(pairUsername);
     });
   res.redirect(`/group/group/${groupId}`);
   // let transporter = nodemailer.createTransport({
