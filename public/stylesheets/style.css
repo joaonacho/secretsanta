@@ -119,6 +119,12 @@ nav {
   background: #fffafb6e;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
 }
+
+.nav-link:hover {
+  font-size: 1.1rem;
+  color: #114b5f;
+}
+
 .my-container {
   margin-top: 5%;
   max-width: 90%;
@@ -254,7 +260,7 @@ a:hover {
   max-width: 100vw;
   padding: 6rem 0 2rem 0;
 }
-@media (min-width: 600px) {
+@media (min-width: 650px) {
   .canva {
     display: flex;
     flex-wrap: wrap;
@@ -263,7 +269,7 @@ a:hover {
     justify-content: space-evenly;
     min-height: 100vh;
     max-width: 100vw;
-    padding: 6rem 15rem 2rem 15rem;
+    padding: 6rem 10rem 2rem 10rem;
   }
 }
 

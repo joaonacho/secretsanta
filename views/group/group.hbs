@@ -3,7 +3,7 @@
     <img
       src="{{group.groupImg}}"
       alt="group_cover_image"
-      style="width: 100%;"
+      style="width: 100%; border-radius: 10px;"
     />
     <div class="nameProfile">
       <h2 class="">{{group.groupName}}</h2>
@@ -29,8 +29,8 @@
       {{/if}}
     </div>
 
-    <h5>{{group.description}}</h5>
-    <h3>Gift price: {{group.price}}€</h3>
+    <h5><i>{{group.description}}</i></h5>
+    <h4>Gift price: <strong>{{group.price}}€</strong></h4>
   </div>
 
   
@@ -56,24 +56,34 @@
   </div>
 
 
-  {{#if admin}}
-    {{#if group.shuffled}}
-     <a href="/group/shuffle/{{group._id}}"><button
-      class="btn-green"
-        type="submit"
-        style="background-color:gold"
-      > Shuffle
-      </button></a>
-    {{else}}
-      <p> <strong>{{group.groupName}} was shuffled!</strong></p>
+  <div class="text-center">
+    {{#if admin}}
+      {{#if group.shuffled}}
+        <a href="/group/shuffle/{{group._id}}"><button
+            class="btn-green"
+            type="submit"
+            style="background-color:gold"
+          >
+            Shuffle
+          </button></a>
+      {{else}}
+      <div style="margin-top: 3%;">
+        <p><strong>{{group.groupName}} was shuffled!</strong></p>
+        <hr style="width: 100%; margin-top: 4%;">
+        <h4><strong>Click on the button below to discover who is your webstie</strong></h4>
+        </div>
 
-      <form action="/group/sendemail/{{group._id}}" method="post">
-        <button type="submit" class="btn-green"
-        type="submit"
-        style="background-color:gold">Send emails</button>
-      </form>
+        <form action="/group/sendemail/{{group._id}}" method="post">
+          <button
+            type="submit"
+            class="btn-green"
+            type="submit"
+            style="background-color:gold"
+          >Send emails</button>
+        </form>
+      {{/if}}
     {{/if}}
-  {{/if}}
+    </div>
 
 
   {{#if userIsConnected}}

@@ -18,8 +18,13 @@
           <a href="/auth/signup"> Sign Up</a></p>
       </form>
     </div>
+
+    {{#if successMessage}}
+      <p style="color: rgb(29, 194, 29);">{{successMessage}}</p>
+    {{/if}}
+
     {{#if errorMessage}}
-      {{errorMessage}}
+      <p style="color:orangered">{{errorMessage}}</p>
     {{/if}}
   </div>
 </section>

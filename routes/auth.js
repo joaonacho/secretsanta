@@ -37,7 +37,7 @@ router.post(
 
     if (!username || !email) {
       return res.status(400).render("auth/signup", {
-        errorMessage: "Please provide your username.",
+        errorMessage: "Please provide your username and email.",
       });
     }
 
@@ -81,8 +81,10 @@ router.post(
               }
             );
           })
-          .then((user) => {
-            res.redirect("/auth/login");
+          .then(() => {
+            res.render("auth/login", {
+              successMessage: "Success! Please log in.",
+            });
           });
       }
       // if user is not found, create a new user - start with hashing the password

@@ -163,7 +163,7 @@ router.post("/add/:groupId", (req, res, next) => {
           { $push: { groups: groupId } },
           { new: true }
         ).then(() => {
-          console.log("user updated", group);
+          console.log("user updated");
         });
       }
     })
@@ -258,7 +258,6 @@ router.post("/shuffle/:groupId", (req, res, next) => {
         }
       }
 
-      console.log(idPairs);
       return idPairs;
     })
     //Updating group pairs (works)
@@ -269,9 +268,9 @@ router.post("/shuffle/:groupId", (req, res, next) => {
         { new: true }
       ).then(() => {
         console.log("Shuffle success");
+        res.redirect(`/group/group/${groupId}`);
       });
     });
-  res.redirect(`/group/group/${groupId}`);
 });
 
 //POST send email
@@ -316,7 +315,9 @@ router.post("/sendemail/:groupId", (req, res, next) => {
           html: `
           <h1 style="align-text: center;">Hello from Webstie!</h1>          
 
-          <p style="align-text: center;"><b>${message} is ${uniqueUsername[index]}</b></p>
+          <p style="align-text: center;"><b>${message} is ${uniqueUsername[index]}!</b></p>
+
+          <p>You can check your webstie's interests by clicking in his/her name in the group page.
           `,
         });
       });
