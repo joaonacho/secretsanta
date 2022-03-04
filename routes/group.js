@@ -258,7 +258,6 @@ router.post("/shuffle/:groupId", (req, res, next) => {
         }
       }
 
-      console.log(idPairs);
       return idPairs;
     })
     //Updating group pairs (works)
@@ -269,9 +268,9 @@ router.post("/shuffle/:groupId", (req, res, next) => {
         { new: true }
       ).then(() => {
         console.log("Shuffle success");
+        res.redirect(`/group/group/${groupId}`);
       });
     });
-  res.redirect(`/group/group/${groupId}`);
 });
 
 //POST send email
