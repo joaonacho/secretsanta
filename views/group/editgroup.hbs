@@ -1,5 +1,6 @@
 <div class="canva">
   <div class="box-glass container-form">
+    <h2>Edit Group</h2>
     <form
       action="/group/edit/{{group._id}}"
       method="post"
@@ -41,10 +42,10 @@
         <input type="file" id="groupImg" name="groupImg" />
       </fieldset>
 
-      <button type="submit">Save changes</button>
+      <button class="btn-green" type="submit">Save changes</button>
     </form>
 
-    <button>
+    <button class="btn-red">
       <a href="/group/group/delete/{{group._id}}"> Delete group</a></button>
   </div>
 
