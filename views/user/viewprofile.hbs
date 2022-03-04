@@ -1,5 +1,5 @@
 <div class="canva">
-  <div class="box-glass">
+  <div class="box-glass container-profile">
     <img class="profileImg" src="{{userFound.profileImg}}" />
 
     <div class="nameProfile">
@@ -11,11 +11,11 @@
 
   <div class="box-glass container-groups-wrap">
     {{#each userFound.groups}}
-      <div class="box-glass-group" style="width: 7rem;">
+      <div class="box-glass-group" style="width: 10rem;">
         <img src="{{groupImg}}" class="card-img-top" alt="group_image" />
         <div class="card-body">
-          <h5>
-            {{groupName}}</h5>
+          <h3 class="text-center">
+            {{groupName}}</h3>
         </div>
       </div>
     {{/each}}

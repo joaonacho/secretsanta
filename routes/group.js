@@ -316,7 +316,9 @@ router.post("/sendemail/:groupId", (req, res, next) => {
           html: `
           <h1 style="align-text: center;">Hello from Webstie!</h1>          
 
-          <p style="align-text: center;"><b>${message} is ${uniqueUsername[index]}</b></p>
+          <p style="align-text: center;"><b>${message} is ${uniqueUsername[index]}!</b></p>
+
+          <p>You can check your webstie's interests by clicking in his/her name in the group page.
           `,
         });
       });

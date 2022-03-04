@@ -118,6 +118,12 @@ nav {
   background: #fffafb6e;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
 }
+
+.nav-link:hover {
+  font-size: 1.1rem;
+  color: #114b5f;
+}
+
 .my-container {
   margin-top: 5%;
   max-width: 90%;
