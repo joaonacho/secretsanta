@@ -67,7 +67,9 @@
             Shuffle
           </button></a>
       {{else}}
-        <p> <strong>{{group.groupName}} was shuffled!</strong></p>
+      <div style="margin-top: 3%;">
+        <p><strong>{{group.groupName}} was shuffled!</strong></p>
+        </div>
 
         <form action="/group/sendemail/{{group._id}}" method="post">
           <button

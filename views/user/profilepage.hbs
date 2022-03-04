@@ -32,7 +32,12 @@
     {{#if usersInGroup}}
       {{#each usersInGroup}}
         <div class="box-glass-group" style="width: 10rem;">
-          <img src="{{this.groupImg}}" class="card-img-top" alt="group_image" />
+          <img
+            src="{{this.groupImg}}"
+            class="card-img-top"
+            alt="group_image"
+            style="width: 100%; border-radius: 10px;"
+          />
           <div class="card-body">
             <h3 class="text-center">
               <a href="/group/group/{{_id}}"> {{this.groupName}} </a></h3>
