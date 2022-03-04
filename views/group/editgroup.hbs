@@ -1,6 +1,7 @@
 <div class="canva">
   <div class="box-glass container-form">
-    <h2>Edit Group</h2>
+
+    <h2>Edit {{group.groupName}}</h2>
     <form
       action="/group/edit/{{group._id}}"
       method="post"
@@ -45,8 +46,11 @@
       <button class="btn-green" type="submit">Save changes</button>
     </form>
 
-    <button class="btn-red">
-      <a href="/group/group/delete/{{group._id}}"> Delete group</a></button>
+    <a href="/group/group/delete/{{group._id}}"><button
+        class="btn-green"
+        style="background-color:indianred"
+      >
+        Delete group</button></a>
   </div>
 
 </div>

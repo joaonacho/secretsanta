@@ -1,11 +1,18 @@
-<h1>WARNING</h1>
-<h1>WARNING</h1>
-<h1>WARNING</h1>
-<h1>WARNING</h1>
+<section class="canva">
+  <div class="box-glass container-form">
 
-<h1>are you sure you want to delete {{groupDelete.groupName}}?</h1>
+    <h1>Are you sure you want to delete {{groupDelete.groupName}}?</h1>
 
-<button><a href="/group/group/{{groupDelete._id}}">No</a></button>
+    <a class="signup" href="/group/group/{{groupDelete._id}}">
+      <button class="btn-green">
+        No</button></a>
 
-<form action="/group/group/delete/{{groupDelete._id}}" method="post">
-  <button type="submit">Yes</button></form>
+    <form action="/group/group/delete/{{groupDelete._id}}" method="post">
+      <button
+        class="btn-green"
+        type="submit"
+        style="background-color:indianred"
+      >Yes</button></form>
+
+  </div>
+</section>

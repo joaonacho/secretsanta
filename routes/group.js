@@ -258,6 +258,7 @@ router.post("/shuffle/:groupId", (req, res, next) => {
         }
       }
 
+      console.log(idPairs);
       return idPairs;
     })
     //Updating group pairs (works)
@@ -270,14 +271,6 @@ router.post("/shuffle/:groupId", (req, res, next) => {
         console.log("Shuffle success");
       });
     });
-  // .then(() => {
-  //   Group.findById(groupId)
-  //     // .populate("pairs")
-  //     .then((groupPairs) => {
-  //       console.log(groupPairs);
-  //     });
-  // });
-
   res.redirect(`/group/group/${groupId}`);
 });
 
@@ -300,24 +293,36 @@ router.post("/sendemail/:groupId", (req, res, next) => {
         pairUsername.push(username.username);
       });
 
-      console.log(pairEmails);
-      console.log(pairUsername);
+      let uniqueEmail = [...new Set([...pairEmails])];
+      let usernames = pairUsername.slice(1, pairUsername.length);
+      let uniqueUsername = [...new Set([...usernames])];
+
+      const message = `Your webstie`;
+
+      let transporter = nodemailer.createTransport({
+        service: "Gmail",
+        auth: {
+          user: "webstie.2022@gmail.com",
+          pass: "Web.Bestie2022",
+        },
+      });
+
+      uniqueEmail.forEach((email, index) => {
+        transporter.sendMail({
+          from: '"Webstie" <web.bestie2022@gmail.com>',
+          to: email,
+          subject: "Find who is your secret friend!",
+          text: message,
+          html: `
+          <h1 style="align-text: center;">Hello from Webstie!</h1>          
+
+          <p style="align-text: center;"><b>${message} is ${uniqueUsername[index]}</b></p>
+          `,
+        });
+      });
     });
+
   res.redirect(`/group/group/${groupId}`);
-  // let transporter = nodemailer.createTransport({
-  //   service: "Gmail",
-  //   auth: {
-  //     user: "webstie.2022@gmail.com",
-  //     pass: "Web.Bestie2022",
-  //   },
-  // });
-  // transporter.sendMail({
-  //   from: '"Webstie" <web.bestie2022@gmail.com>',
-  //   // to: email,
-  //   subject: subject,
-  //   text: message,
-  //   html: `<b>${message}</b>`,
-  // });
 });
 
 //POST Comments

@@ -29,10 +29,6 @@
       {{/if}}
     </div>
 
-    {{!-- {{#if admin}}
-      <button><a href="/group/group/edit/{{group._id}}">Edit Group </a></button>
-    {{/if}} --}}
-
     <h5>{{group.description}}</h5>
     <h3>Gift price: {{group.price}}€</h3>
   </div>
@@ -61,14 +57,21 @@
 
 
   {{#if admin}}
-  {{#if group.shuffled}}
-      <button class="btn-green"> <a href="/group/shuffle/{{group._id}}">Shuffle</a></button>
+    {{#if group.shuffled}}
+     <a href="/group/shuffle/{{group._id}}"><button
+      class="btn-green"
+        type="submit"
+        style="background-color:gold"
+      > Shuffle
+      </button></a>
     {{else}}
-      <p>The group was shuffled!</p>
+      <p> <strong>{{group.groupName}} was shuffled!</strong></p>
 
       <form action="/group/sendemail/{{group._id}}" method="post">
-<button type="submit">Send emails</button>
-</form>
+        <button type="submit" class="btn-green"
+        type="submit"
+        style="background-color:gold">Send emails</button>
+      </form>
     {{/if}}
   {{/if}}
 
