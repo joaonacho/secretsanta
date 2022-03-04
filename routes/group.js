@@ -163,7 +163,7 @@ router.post("/add/:groupId", (req, res, next) => {
           { $push: { groups: groupId } },
           { new: true }
         ).then(() => {
-          console.log("user updated", group);
+          console.log("user updated");
         });
       }
     })

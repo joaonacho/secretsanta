@@ -81,8 +81,10 @@ router.post(
               }
             );
           })
-          .then((user) => {
-            res.redirect("/auth/login");
+          .then(() => {
+            res.render("auth/login", {
+              successMessage: "Success! Please log in.",
+            });
           });
       }
       // if user is not found, create a new user - start with hashing the password
