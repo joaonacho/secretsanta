@@ -51,12 +51,19 @@
 
   {{#if admin}}
     {{#if group.shuffled}}
-      <button> <a href="/group/shuffle/{{group._id}}">SHUFFLE</a></button>
+     <a href="/group/shuffle/{{group._id}}"><button
+      class="btn-green"
+        type="submit"
+        style="background-color:gold"
+      > Shuffle
+      </button></a>
     {{else}}
-      <p>{{group.groupName}} was shuffled!</p>
+      <p> <strong>{{group.groupName}} was shuffled!</strong></p>
 
       <form action="/group/sendemail/{{group._id}}" method="post">
-        <button type="submit">Send emails</button>
+        <button type="submit" class="btn-green"
+        type="submit"
+        style="background-color:gold">Send emails</button>
       </form>
     {{/if}}
   {{/if}}

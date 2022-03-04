@@ -297,7 +297,7 @@ router.post("/sendemail/:groupId", (req, res, next) => {
       let usernames = pairUsername.slice(1, pairUsername.length);
       let uniqueUsername = [...new Set([...usernames])];
 
-      const message = `Hello, your webstie`;
+      const message = `Your webstie`;
 
       let transporter = nodemailer.createTransport({
         service: "Gmail",
