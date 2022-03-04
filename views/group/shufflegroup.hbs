@@ -1,14 +1,27 @@
-<h2>Friends in {{groupShuffle.groupName}}</h2>
-<ul>
-  {{#each groupShuffle.users}}
-    <li>{{this.username}}</li>
-  {{/each}}
-</ul>
+<section class="canva">
+  <div class="box-glass container-form">
+    <h2>Are you sure you want to shuffle {{groupShuffle.groupName}}?</h2>
 
-<h3>Are you sure you want to shuffle {{groupShuffle.groupName}}?</h3>
+    <a href="/group/group/{{groupShuffle._id}}"><button class="btn-green">
+        No</button></a>
 
-<button> <a href="/group/group/{{groupShuffle._id}}">No</a></button>
+    <form action="/group/shuffle/{{groupShuffle._id}}" method="POST">
+      <button
+        type="submit"
+        class="btn-green"
+        type="submit"
+        style="background-color:gold"
+      >Yes</button>
+    </form>
+  </div>
 
-<form action="/group/shuffle/{{groupShuffle._id}}" method="POST">
-  <button type="submit">SHUFFLE</button>
-</form>
+  <div class="box-glass container-form">
+
+    <h3>Friends in {{groupShuffle.groupName}}</h3>
+    <ul>
+      {{#each groupShuffle.users}}
+        <li>{{this.username}}</li>
+      {{/each}}
+    </ul>
+  </div>
+</section>

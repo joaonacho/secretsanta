@@ -37,7 +37,7 @@ router.post(
 
     if (!username || !email) {
       return res.status(400).render("auth/signup", {
-        errorMessage: "Please provide your username.",
+        errorMessage: "Please provide your username and email.",
       });
     }
 

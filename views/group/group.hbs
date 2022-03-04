@@ -49,41 +49,46 @@
     </ul>
   </div>
 
-  {{#if admin}}
-    {{#if group.shuffled}}
-     <a href="/group/shuffle/{{group._id}}"><button
-      class="btn-green"
-        type="submit"
-        style="background-color:gold"
-      > Shuffle
-      </button></a>
-    {{else}}
-      <p> <strong>{{group.groupName}} was shuffled!</strong></p>
+  <div class="text-center">
+    {{#if admin}}
+      {{#if group.shuffled}}
+        <a href="/group/shuffle/{{group._id}}"><button
+            class="btn-green"
+            type="submit"
+            style="background-color:gold"
+          >
+            Shuffle
+          </button></a>
+      {{else}}
+        <p> <strong>{{group.groupName}} was shuffled!</strong></p>
 
-      <form action="/group/sendemail/{{group._id}}" method="post">
-        <button type="submit" class="btn-green"
-        type="submit"
-        style="background-color:gold">Send emails</button>
-      </form>
+        <form action="/group/sendemail/{{group._id}}" method="post">
+          <button
+            type="submit"
+            class="btn-green"
+            type="submit"
+            style="background-color:gold"
+          >Send emails</button>
+        </form>
+      {{/if}}
     {{/if}}
-  {{/if}}
-</div>
+  </div>
 
-<div id="commentsgroup">
+  <div id="commentsgroup">
 
-  <div class="my-container-comments-principal">
-    {{#each group.comments}}
-      <div class="my-container-comments">
-        <p>"{{this.content}}"</p>
-        <div class="d-flex justify-content-between">
-          <div class="text-start">
-            <p><i>{{this.user}}</i></p>
-            <p><i>{{this.date}}</i></p>
+    <div class="my-container-comments-principal">
+      {{#each group.comments}}
+        <div class="my-container-comments">
+          <p>"{{this.content}}"</p>
+          <div class="d-flex justify-content-between">
+            <div class="text-start">
+              <p><i>{{this.user}}</i></p>
+              <p><i>{{this.date}}</i></p>
+            </div>
           </div>
         </div>
-      </div>
-    {{/each}}
-  </div>
+      {{/each}}
+    </div>
     <div class="d-flex justify-content-center pt-3 pb-2">
       <form action="/group/comment/{{group._id}}" method="post">
         <fieldset>
