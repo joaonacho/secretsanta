@@ -18,7 +18,7 @@
 ---
 
 Have you ever used Secret Santa generators? Full of ads and complicated to use, right?
-So me and André had this idea of making one Secret Santa app without complications and with extra features that it's going to make the user experience better. You can use it to make groups with your closest friends, send group messages to organize the event and limit your gift price. After that, you just have to shuffle the group and press the button "send emails" to discover who is your webstie! :wink:
+So me and André had this idea of making one Secret Santa app without complications and with extra features that are going to make the user experience better. You can use it to make groups with your closest friends, limit your gift price and send group messages to organize the event. After that, you just have to shuffle the group and press the button "send emails" to discover who is your webstie! :wink:
 
 ---
 
