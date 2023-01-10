@@ -9,7 +9,7 @@
   
 <h1 align="center">Webstie </h1>
 <br />
-<img src="https://github.com/andregn26/game--js--Atlandida-Explorer/blob/main/assets/subgif.gif" width="200" alt="animated" />
+<img src="https://github.com/andregn26/SecretSanta/blob/master/screenshot1.png" width="700" alt="animated" />
     <br />
     <br />
     <br />
