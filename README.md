@@ -24,7 +24,7 @@ So me and André had this idea of making one Secret Santa app without complicati
 
 #### Deployed here:
 
-[Webstie](https://ihsecretsanta.herokuapp.com/)
+[Webstie](https://secretsanta.cyclic.app/)
 
 ## Enjoy it :joystick:
 
