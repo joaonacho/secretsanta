@@ -21,7 +21,7 @@ So we had this idea of making one Secret Santa app without complications and wit
     <br />
     <a href="https://secretsanta.cyclic.app/" target="_blank">Deployed Here</a>
     ·
-    <a href="https://github.com/andregn26/game--js--Atlandida-Explorer/issues">Report Bug</a>
+    <a href="https://github.com/joaonacho/secretsanta/issues">Report Bug</a>
     
   </p>
 </div>
@@ -44,18 +44,17 @@ So we had this idea of making one Secret Santa app without complications and wit
 <!-- ACKNOWLEDGMENTS -->
 ## Biggest Learnings 📖
 
-#### With this project I wanted to deepen my knowledge of Vanilla JavaScript:
-* []() **Object Oriented Programming** (OOP) - concepts of object, class and methods and their use through the constructor method and functions.
-* []() Concept of **Inheritance** and the two types of classes - parent classes and child classes through the keywords "extend" and "super".
-* []() Class **Hoisting** - using the keyword "new" to declare a class
-* []() Reinforcement of **logical thinking** by planning the game and its features.
-* []() Reviewed **DOM Manipulation** concepts
-* []() **"this" Keyword** - learned the different contexts in which the keyword is used and how it behaves
-
-
-#### It also helped me to learn more about design tools like:
-* []() Adobe Ilustrator -  for creating the different layers of the background and the visuals for the players and enemies
-* []() DragonBones - It was my first experience with this software that allowed me to create the spritesheets for animate the player
+#### This project helped us to consolidate the knowledge acquired during the 2nd module of IronHack's fullstack developer bootcamp focused on create a server and discover the intricacies of data modeling.
+* []() Setting up a development environment for building an ExpressJs app
+* []() Understanding the MVC pattern and how it applies to building an ExpressJs app
+* []() Implementing routing and handling requests in an ExpressJs app
+* []() Integrating Handlebars templates for dynamic content rendering in an ExpressJs app
+* []() Using NodeJS modules and third-party libraries to enhance functionality in an ExpressJs app
+* []() Debugging and troubleshooting errors in an ExpressJs app
+* []() Implementing user authentication and authorization in an ExpressJs app
+* []() Connecting to a database and interacting with data in an ExpressJs app
+* []() Optimizing performance and scalability in an ExpressJs app
+* []() Deploying and hosting an ExpressJs app in a production environment
 
 ---
 
