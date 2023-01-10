@@ -1,4 +1,3 @@
-[![LinkedIn][linkedin-shield]][linkedin-url]
 <!-- PROJECT LOGO -->
 <br />
 
@@ -7,7 +6,7 @@
 </p>
 <div align="center">
 
-<h1 align="center">Webstie</h1>
+<h1 align="center">Webstie (IronHack Project)</h1>
 <br />
 <img src="https://github.com/andregn26/game--js--Atlandida-Explorer/blob/main/assets/subgif.gif" width="200" alt="animated" />
     <br />
