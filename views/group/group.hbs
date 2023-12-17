@@ -1,146 +1,136 @@
-<div class="canva">
-  <div class="box-glass container-flex-center">
-    <img
-      src="{{group.groupImg}}"
-      alt="group_cover_image"
-      style="width: 100%; border-radius: 10px;"
-    />
-    <div class="nameProfile">
-      <h2 class="">{{group.groupName}}</h2>
-      {{#if admin}}
-        <a href="/group/group/edit/{{group._id}}">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="64"
-            height="64"
-            fill="currentColor"
-            class="bi bi-pencil-square edit-icon-large"
-            viewBox="-10 -15 40 40"
-          >
-            <path
-              d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
-            ></path>
-            <path
-              fill-rule="evenodd"
-              d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
-            ></path>
-          </svg>
-        </a>
-      {{/if}}
-    </div>
+<!-- component -->
+<div class="relative min-h-screen w-full">
+  <figure class="absolute z-0 top-0 left-0 w-full h-full">
+    <img class="w-full h-52 object-cover" src="{{group.groupImg}}" alt="">
+  </figure>
 
-    <h5><i>{{group.description}}</i></h5>
-    <h4>Gift price: <strong>{{group.price}}€</strong></h4>
-  </div>
-
-  
-
-  <div class="box-glass container-profile">
-    <div class="text-center">
-    <ul><h3>Participants</h3> 
-      {{#each group.users}}
-        <li><a class="a" href="/user/view/profile/{{this._id}}">{{this.username}}</a></li>
-      {{/each}}
-    </ul>
-    </div>
-    {{#if admin}}
-        {{#if group.shuffled}}
-      
-        <a href="/group/add/{{group._id}}">
-  <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="currentColor" class="bi bi-person-plus-fill edit-icon-large" viewBox="0 0 16 16">
-    <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-    <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
-  </svg>
+  <div class="relative z-20 w-full flex flex-col items-center justify-center px-6 mt-36 mx-auto">
+    <div class="w-full bg-white rounded-lg shadow sm:max-w-3xl px-6 py-8">
+      {{!-- Group info --}}
+      <div class="w-full">
+        <div class="w-full">
+        </div>
+        {{#if admin}}
+        <div class=" badge badge-accent text-xs"><a href="/group/group/edit/{{group._id}}">Edit Group</a></div>
         {{/if}}
-    {{/if}}
-  </div>
-
-
-  <div class="text-center">
-    {{#if admin}}
-      {{#if group.shuffled}}
-        <a href="/group/shuffle/{{group._id}}"><button
-            class="btn-green"
-            type="submit"
-            style="background-color:gold"
-          >
-            Shuffle
-          </button></a>
-      {{else}}
-      <div style="margin-top: 3%;">
-        <p><strong>{{group.groupName}} was shuffled!</strong></p>
-        <hr style="width: 100%; margin-top: 4%;">
-        <h4><strong>Click on the button below to discover who is your webstie</strong></h4>
+        <div class="flex flex-col gap-4">
+          <h2 class="text-center font-bold text-2xl">{{group.groupName}} - Max {{group.price}}€</h2>
+          <p class="text-center font-semibold text-md">{{group.description}}</p>
         </div>
+        {{!-- shuffle button --}}
+        <div class="w-full mt-4">
+          <div class="w-full flex justify-center">
+            {{#if admin}}
+            {{#if group.shuffled}}
+            <a href="/group/shuffle/{{group._id}}" class="btn btn-primary btn-wide btn-sm"><button type="submit"
+                >
+                Shuffle
+              </button></a>
+            {{else}}
+            <div style="margin-top: 3%;">
+              <p><strong>{{group.groupName}} was shuffled!</strong></p>
+              <hr style="width: 100%; margin-top: 4%;">
+              <h4><strong>Click on the button below to discover who is your webstie</strong></h4>
+            </div>
 
-        <form action="/group/sendemail/{{group._id}}" method="post">
-          <button
-            type="submit"
-            class="btn-green"
-            type="submit"
-            style="background-color:gold"
-          >Send emails</button>
-        </form>
-      {{/if}}
-    {{/if}}
-    </div>
-
-
-  {{#if userIsConnected}}
-  <div class="box-transparent">
-  {{#each group.comments}}
-  <div class="dialogbox">
-    <div class="bodymsgconect">
-        <span class="tip tip-up"></span>
-        <div class="message">
-          <span><h5>"{{this.content}}"</h5></span>
-          <div class="alignComment">
-            <p><i>{{this.user}} </i></p>
-          <p><i> {{this.date}}</i></p>
+            <form action="/group/sendemail/{{group._id}}" method="post">
+              <button type="submit" class="btn-green" type="submit" style="background-color:gold">Send emails</button>
+            </form>
+            {{/if}}
+            {{/if}}
           </div>
         </div>
-    </div>
-  </div>
-  {{/each}}
-  </div>
-  {{else}}
-    <div class="box-transparent">
-  {{#each group.comments}}
-    <div class="dialogbox">
-    <div class="bodymsgother">
-        <span class="tip tip-up"></span>
-        <div class="message">
-          <span><p>"{{this.content}}"</p></span>
-          <div class="">
-            <p><i>{{this.user}}</i></p>
-          <p><i>{{this.date}}</i></p>
+
+      </div>
+      {{!-- Participants --}}
+      <div>
+        <ul>
+          <h3>Participants</h3>
+          {{#each group.users}}
+          <li><a class="a" href="/user/view/profile/{{this._id}}">{{this.username}}</a></li>
+          {{/each}}
+        </ul>
+        {{!-- add participants --}}
+        <div>
+          {{#if admin}}
+          {{#if group.shuffled}}
+
+          <a href="/group/add/{{group._id}}">
+            <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="currentColor"
+              class="bi bi-person-plus-fill edit-icon-large" viewBox="0 0 16 16">
+              <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+              <path fill-rule="evenodd"
+                d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
+            </svg>
+            {{/if}}
+            {{/if}}
+        </div>
+
+
+
+      </div>
+      {{!-- Comment section --}}
+      <div>
+        {{!-- Comments --}}
+        <div>
+          {{#if userIsConnected}}
+          <div class="box-transparent">
+            {{#each group.comments}}
+            <div class="dialogbox">
+              <div class="bodymsgconect">
+                <span class="tip tip-up"></span>
+                <div class="message">
+                  <span>
+                    <h5>"{{this.content}}"</h5>
+                  </span>
+                  <div class="alignComment">
+                    <p><i>{{this.user}} </i></p>
+                    <p><i> {{this.date}}</i></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {{/each}}
+          </div>
+          {{else}}
+          <div class="box-transparent">
+            {{#each group.comments}}
+            <div class="dialogbox">
+              <div class="bodymsgother">
+                <span class="tip tip-up"></span>
+                <div class="message">
+                  <span>
+                    <p>"{{this.content}}"</p>
+                  </span>
+                  <div class="">
+                    <p><i>{{this.user}}</i></p>
+                    <p><i>{{this.date}}</i></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {{/each}}
+          </div>
+          {{/if}}
+        </div>
+        {{!-- create comments --}}
+        <div>
+          <div class=" container-form">
+            <form action="/group/comment/{{group._id}}" method="post">
+              <div>
+                <fieldset>
+                  <label for="content">
+                    <textarea class="interests" name="content" id="content" cols="50" rows="2"
+                      placeholder="Comment here..." class="form-control addtxt"></textarea>
+                  </label>
+                </fieldset>
+              </div>
+              <button type="submit" class="btn-green">Comment</button>
+            </form>
           </div>
         </div>
-    </div>
-    </div>
-  {{/each}}
-    </div>
-  {{/if}}
+      </div>
 
-  <div class=" container-form">
-    <form action="/group/comment/{{group._id}}" method="post">
-    <div >
-      <fieldset >
-        <label for="content">
-          <textarea
-          class="interests"
-            name="content"
-            id="content"
-            cols="50"
-            rows="2"
-            placeholder="Comment here..."
-            class="form-control addtxt"
-          ></textarea>
-        </label>
-      </fieldset>
     </div>
-      <button type="submit" class="btn-green">Comment</button>
-    </form>
   </div>
-
 </div>

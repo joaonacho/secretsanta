@@ -1,43 +1,17 @@
-<div class="canva">
+{{!-- <div class="canva">
   <div class="box-glass container-form">
 
     <h2>Edit {{group.groupName}}</h2>
-    <form
-      action="/group/edit/{{group._id}}"
-      method="post"
-      enctype="multipart/form-data"
-    >
+    <form action="/group/edit/{{group._id}}" method="post" enctype="multipart/form-data">
+
+
       <fieldset class="input-box-white">
-        <input
-          required
-          type="text"
-          id="groupName"
-          name="groupName"
-          maxlength="10"
-          value="{{group.groupName}}"
-        />
+        <textarea name="description" id="description" class="interests" cols="50"
+          rows="4">{{group.description}}</textarea>
       </fieldset>
 
       <fieldset class="input-box-white">
-
-        <textarea
-          name="description"
-          id="description"
-          class="interests"
-          cols="50"
-          rows="4"
-        >{{group.description}}</textarea>
-      </fieldset>
-
-      <fieldset class="input-box-white">
-        <input
-          required
-          type="number"
-          id="price"
-          name="price"
-          min="1"
-          value="{{group.price}}"
-        />
+        <input required type="number" id="price" name="price" min="1" value="{{group.price}}" />
       </fieldset>
 
       <fieldset class="input-box-white">
@@ -47,11 +21,57 @@
       <button class="btn-green" type="submit">Save changes</button>
     </form>
 
-    <a href="/group/group/delete/{{group._id}}"><button
-        class="btn-green"
-        style="background-color:indianred"
-      >
-        Delete group</button></a>
+
   </div>
 
+</div> --}}
+
+<div class="w-full flex flex-col items-center justify-center px-6 py-8 mx-auto">
+  <div class="w-full bg-white rounded-lg shadow  md:mt-0 sm:max-w-md xl:p-0 ">
+    <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+      <h1 class="text-xl font-bold leading-tight tracking-tight text-slate-900 md:text-2xl ">
+        Edit your Group - {{group.groupName}}
+      </h1>
+      <form action="/group/edit/{{group._id}}" method="post" enctype="multipart/form-data"
+        class="space-y-4 md:space-y-6">
+        <div>
+          <label for="groupName" class="block mb-2 text-sm font-medium text-slate-900 ">Name of the Group</label>
+          <input required type="text" name="groupName" id="groupName" value="{{group.groupName}}"
+            class="bg-slate-50 border border-slate-300 text-slate-900 sm:text-sm rounded-lg focus:ring-accent focus:border-accent block w-full p-2.5 ">
+        </div>
+
+        {{!-- Description of the Group --}}
+        <div>
+          <label for="description" class="block mb-2 text-sm font-medium text-slate-900 ">Describe your Group</label>
+          <input type="text" name="description" id="description" value="{{group.description}}"
+            class="bg-slate-50 border border-slate-300 text-slate-900 sm:text-sm rounded-lg focus:ring-accent focus:border-accent block w-full p-2.5 " />
+        </div>
+
+        <div>
+          <label for="price" class="block mb-2 text-sm font-medium text-slate-900 ">Select a maximum price</label>
+          <input value="{{group.price}}" type="number" id="price" name="price"
+            aria-describedby="helper-text-explanation"
+            class="bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 "
+            placeholder="10" required>
+        </div>
+
+        {{!-- Image for the group --}}
+        <div>
+          <label class="block mb-2 text-sm font-medium text-slate-900" for="groupImg">Upload a new cover image</label>
+          <input aria-describedby="file_input_help" type="file" id="groupImg" name="groupImg"
+            class="block w-full text-sm text-slate-900 border border-slate-300 rounded-lg cursor-pointer bg-slate-50 focus:outline-none ">
+          <p class="mt-1 text-sm text-slate-500 " id="file_input_help">PNG or JPG.</p>
+        </div>
+
+        <button type="submit"
+          class="  bg-primary  focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center ">Save
+          changes</button>
+
+        <a href="/group/group/delete/{{group._id}}"
+          class="bg-error  focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center ">Delete
+          Group</a>
+      </form>
+    </div>
+
+  </div>
 </div>

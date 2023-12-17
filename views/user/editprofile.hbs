@@ -1,40 +1,42 @@
-<button> <a href="/user/profile/{{user._id}}">Go back</a></button>
+<div class="w-full flex flex-col items-center justify-center px-6 py-8 mx-auto">
+  <div class="w-full bg-white rounded-lg shadow  md:mt-0 sm:max-w-md xl:p-0 ">
+    <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+      <h1 class="text-xl font-bold leading-tight tracking-tight text-slate-900 md:text-2xl ">
+        Edit your Profile
+      </h1>
+      <form action="/user/profile/edit/{{user._id}}" method="POST" enctype="multipart/form-data"
+        class="space-y-4 md:space-y-6">
+        <div>
+          <label for="username" class="block mb-2 text-sm font-medium text-slate-900 ">Your Name</label>
+          <input type="text" name="username" id="username" value="{{user.username}}"
+            class="bg-slate-50 border border-slate-300 text-slate-900 sm:text-sm rounded-lg focus:ring-accent focus:border-accent block w-full p-2.5 ">
+        </div>
 
-<div class="canva">
-  <div class="box-glass container-form">
-    <h2>Edit Profile</h2>
-    <form
-      action="/user/profile/edit/{{user._id}}"
-      method="POST"
-      enctype="multipart/form-data"
-    >
-      <fieldset class="input-box-white">
-        <input
-          type="text"
-          name="username"
-          id="username"
-          value="{{user.username}}"
-        />
+        <div>
+          <label for="interests" class="block mb-2 text-sm font-medium text-slate-900 ">Describe your interests</label>
+          <textarea name="interests" id="interests" cols="30" rows="5"
+            class="bg-slate-50 border border-slate-300 text-slate-900 sm:text-sm rounded-lg focus:ring-accent focus:border-accent block w-full p-2.5 ">{{user.interests}}</textarea>
+        </div>
+        <div>
+          <label class="block mb-2 text-sm font-medium text-gray-900" for="profileImg">Upload a new profile
+            image</label>
+          <input
+            class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none "
+            aria-describedby="file_input_help" type="file" id="profileImg" name="profileImg">
+          <p class="mt-1 text-sm text-gray-500 " id="file_input_help">PNG or JPG.</p>
+        </div>
 
-      </fieldset>
-      <fieldset class="input-box-white">
-        <textarea
-          placeholder="In one setence, describe your interests"
-          name="interests"
-          id="interests"
-          class="interests"
-          cols="30"
-          rows="5"
-        >{{user.interests}}</textarea>
-      </fieldset>
-      <fieldset class="input-box-white">
-        <input type="file" id="profileImg" name="profileImg" />
-      </fieldset>
-      {{#if errorMessage}}
-        {{errorMessage}}
+            <button type="submit"
+      class="w-full  bg-primary hover:bg-accent focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center ">Save
+      changes</button>
+            {{#if errorMessage}}
+      {{errorMessage}}
       {{/if}}
-      <button class="btn-green-small" type="submit">Save changes</button>
+    <p class="text-sm font-light text-slate-500 ">
+      Go back to your <a href="/user/profile/{{user._id}}" class="font-medium text-accent hover:underline ">Profile</a>
+    </p>
     </form>
-  </div>
+    </div>
 
+  </div>
 </div>

@@ -1,83 +1,46 @@
-<html lang="en">
+<html lang="en" data-theme="bumblebee">
 
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Webstie</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="/stylesheets/style.css" />
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Webstie</title>
+  <link rel="stylesheet" href="/stylesheets/style.css" />
+</head>
 
-
-    <nav class="navbar navbar-light bg-light fixed-top">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="/">Webstie</a>
-        {{#if userIsConnected}}
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvasNavbar"
-          aria-controls="offcanvasNavbar"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div
-          class="offcanvas offcanvas-end"
-          tabindex="-1"
-          id="offcanvasNavbar"
-          aria-labelledby="offcanvasNavbarLabel"
-          style="background-image: url(/images/double-bubble-outline.png);"
-        >
-          <div class="offcanvas-header">
-            <h4 class="offcanvas-title" id="offcanvasNavbarLabel">Welcome, {{username}}</h4>
-            <button
-              type="button"
-              class="btn-close text-reset"
-              data-bs-dismiss="offcanvas"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="offcanvas-body"> 
-            <a href="/user/profile/edit/{{_id}}">
-            <img src="{{profileImg}}" alt="profile-image" style="width: 20%; border-radius: 50%; box-shadow:4px 4px 20px rgba(161, 161, 161, 0.842)"></a>
-            
-            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3" style="margin-top: 15px;">
-              <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="/user/profile/{{_id}}">Profile</a>
-              </li>
-              <hr style="width: 20%;">
-              <li class="nav-item">
-                <a class="nav-link" href="/group/creategroup">Create a new Group</a>
-                </li>
-                <hr style="width: 20%;">
-                <li class="nav-item">
-                <a class="nav-link"href="/auth/logout">Logout</a>
-              </li>
-              <hr style="width: 20%;">
-            </ul>
-        
-          </div>
+<div class="navbar bg-base-100 flex justify-between">
+  <div class="">
+    <a class="btn btn-ghost text-xl" href="/">Webstie</a>
+  </div>
+  <div class="">
+    {{#if userIsConnected}}
+    <div class="dropdown dropdown-end">
+      <div tabindex="0" role="button" class="btn btn-primary btn-circle avatar ">
+        <div class="w-10 rounded-full">
+          <img alt="Tailwind CSS Navbar component" src="{{profileImg}}" />
         </div>
-        {{/if}} 
       </div>
-    </nav>
+      <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+        <li><a href="/user/profile/{{_id}}">Profile</a></li>
+        <li><a href="/user/profile/edit/{{_id}}">Edit Profile</a></li>
+        <li><a href="/group/creategroup">New Group</a></li>
+        <li><a href="/auth/logout">Logout</a></li>
+      </ul>
+    </div>
+    {{/if}}
+    {{#unless userIsConnected}}
+    <div class="flex gap-2 w-full">
+    <a class="btn btn-ghost" href="/auth/login">Login</a>
+    <a class="btn btn-primary" href="/auth/signup">Sign Up</a>
+    </div>
+    {{/unless}}
+  </div>
+</div>
+<main class="bg-slate-100 min-h-[calc(100vh-4rem)] w-full flex flex-col items-center justify-center">
+      {{{body}}}
+</main>
 
-    {{{body}}}
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-      crossorigin="anonymous"
-    ></script>
 
-    <script src="/js/script.js"></script>
-  </body>
+</body>
 
 </html>
