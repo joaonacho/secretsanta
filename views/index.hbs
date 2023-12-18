@@ -1,24 +1,7 @@
-<section class="canva">
-  <div class="box-glass container-flex-center">
-    <h3>Time to party!</h3>
-    <h2>Your personalized secret santa generator</h2>
-    <p>
-      <em>
-        Start a group with your closest friends and make plans easily to
-        exchange gifts!</em></p>
-
-    {{#unless userIsConnected}}
-      <a href="/auth/login"><button class="btn-green">Log in
-        </button></a>
-
-      <a class="signup" href="/auth/signup">Sign up</a>
-    {{/unless}}
-
-    {{#if userIsConnected}}
-      <a href="/user/profile/{{_id}}"><button class="btn-green">Profile
-        </button></a>
-      <a class="signup" href="/group/creategroup">Create group</a>
-
-    {{/if}}
-  </div>
+<img src="/images/circle-scatter.svg" alt="bg" class="absolute top-0 left-0 object-cover h-full w-full">
+<section class="relative w-full flex flex-col items-center justify-center" >
+    <h2 class="font-extrabold uppercase text-5xl mb-6">Time to <span class="text-primary bg-neutral px-1">party!</span></h2>
+    <p class="text-lg text-center"> Start a group with your closest friends <br> and make plans easily to
+        exchange gifts!</p>
+  
 </section>

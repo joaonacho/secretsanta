@@ -14,7 +14,11 @@ module.exports = {
 		// => @media (min-width: 1536px) { ... }
 	},
 	theme: {
-		extend: {},
+		extend: {
+			backgroundImage: {
+				"circle-scatter": "url('/images/circle-scatter.svg')",
+			},
+		},
 	},
 	plugins: [
 		{
