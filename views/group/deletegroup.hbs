@@ -1,20 +1,20 @@
-<section class="canva">
-  <div class="box-glass container-form">
+<div class="w-full flex flex-col items-center justify-center px-6 py-8 mx-auto">
+  <div class="w-full bg-white rounded-lg shadow  md:mt-0 sm:max-w-md ">
+    <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+      <h2 class="text-xl font-bold leading-tight tracking-tight text-slate-900 md:text-2xl text-center ">
+        Are you sure you want to delete {{groupDelete.groupName}}?
+      </h2>
 
-    <h2>Are you sure you want to delete {{groupDelete.groupName}}?</h2>
-
-    <hr />
-
-    <a class="signup" href="/group/group/{{groupDelete._id}}">
-      <button class="btn-green">
-        No</button></a>
-
-    <form action="/group/group/delete/{{groupDelete._id}}" method="post">
-      <button
-        class="btn-green"
-        type="submit"
-        style="background-color:indianred"
-      >Yes</button></form>
-
+      <div class="flex gap-2 justify-center">
+        <form action="/group/group/delete/{{groupDelete._id}}" method="POST">
+          <button type="submit" class="btn btn-outline btn-primary">Yes</button>
+        </form>
+        <a class="btn btn-error" href="/group/group/{{groupDelete._id}}">No</a>
+      </div>
+      <div>
+      </div>
+    </div>
+    <div>
+    </div>
   </div>
-</section>
+</div>

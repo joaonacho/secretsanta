@@ -285,7 +285,7 @@ router.post("/sendemail/:groupId", (req, res, next) => {
 			let transporter = nodemailer.createTransport({
 				service: "Gmail",
 				auth: {
-					user: "webstie.2022@gmail.com",
+					user: "webstie@andregregorio.pt",
 					pass: "Web.Bestie2022",
 				},
 			});

@@ -22,8 +22,7 @@
           <div class="w-full flex justify-center">
             {{#if admin}}
             {{#if group.shuffled}}
-            <a href="/group/shuffle/{{group._id}}" class="btn btn-primary btn-wide btn-sm"><button type="submit"
-                >
+            <a href="/group/shuffle/{{group._id}}" class="btn btn-primary btn-wide btn-sm"><button type="submit">
                 Shuffle
               </button></a>
             {{else}}
@@ -42,95 +41,66 @@
         </div>
 
       </div>
+      <div class="divider"></div>
+
       {{!-- Participants --}}
       <div>
-        <ul>
-          <h3>Participants</h3>
-          {{#each group.users}}
-          <li><a class="a" href="/user/view/profile/{{this._id}}">{{this.username}}</a></li>
-          {{/each}}
-        </ul>
-        {{!-- add participants --}}
-        <div>
+        <h3>Participants</h3>
+        <div class="flex gap-4 items-center flex-wrap">
           {{#if admin}}
           {{#if group.shuffled}}
-
-          <a href="/group/add/{{group._id}}">
-            <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="currentColor"
-              class="bi bi-person-plus-fill edit-icon-large" viewBox="0 0 16 16">
-              <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-              <path fill-rule="evenodd"
-                d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
-            </svg>
-            {{/if}}
-            {{/if}}
-        </div>
-
-
-
-      </div>
-      {{!-- Comment section --}}
-      <div>
-        {{!-- Comments --}}
-        <div>
-          {{#if userIsConnected}}
-          <div class="box-transparent">
-            {{#each group.comments}}
-            <div class="dialogbox">
-              <div class="bodymsgconect">
-                <span class="tip tip-up"></span>
-                <div class="message">
-                  <span>
-                    <h5>"{{this.content}}"</h5>
-                  </span>
-                  <div class="alignComment">
-                    <p><i>{{this.user}} </i></p>
-                    <p><i> {{this.date}}</i></p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {{/each}}
-          </div>
-          {{else}}
-          <div class="box-transparent">
-            {{#each group.comments}}
-            <div class="dialogbox">
-              <div class="bodymsgother">
-                <span class="tip tip-up"></span>
-                <div class="message">
-                  <span>
-                    <p>"{{this.content}}"</p>
-                  </span>
-                  <div class="">
-                    <p><i>{{this.user}}</i></p>
-                    <p><i>{{this.date}}</i></p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {{/each}}
-          </div>
+          <a href="/group/add/{{group._id}}" class="badge badge-neutral">Add Friend</a>
           {{/if}}
-        </div>
-        {{!-- create comments --}}
-        <div>
-          <div class=" container-form">
-            <form action="/group/comment/{{group._id}}" method="post">
-              <div>
-                <fieldset>
-                  <label for="content">
-                    <textarea class="interests" name="content" id="content" cols="50" rows="2"
-                      placeholder="Comment here..." class="form-control addtxt"></textarea>
-                  </label>
-                </fieldset>
+          {{/if}}
+          {{#each group.users}}
+          <div class="flex items-center gap-4">
+            <div class="avatar">
+              <div class="w-8 rounded-full">
+                <img src="{{this.profileImg}}" />
               </div>
-              <button type="submit" class="btn-green">Comment</button>
-            </form>
+            </div>
+            <p>
+              <a href="/user/view/profile/{{this._id}}">{{this.username}}</a>
+            </p>
           </div>
+          {{/each}}
         </div>
       </div>
 
+      <div class="bg-white  py-8 lg:py-16 antialiased">
+        <div class="max-w-2xl mx-auto px-4">
+          <div class="flex justify-between items-center mb-6">
+            <h2 class="text-lg lg:text-2xl font-bold text-gray-900">Chat</h2>
+          </div>
+          {{#if userIsConnected}}
+          {{#each group.comments}}
+          <article class="p-6 mb-3 text-base bg-white border-t border-gray-200">
+            <div class="flex justify-between items-center mb-2">
+              <div class="flex items-center">
+                <p class="inline-flex items-center mr-3 text-sm text-gray-900 font-semibold">{{this.user}}</p>
+                <p class="text-sm text-gray-600"><time>{{this.date}}</time></p>
+              </div>
+            </div>
+            <p class="text-gray-500">{{this.content}}</p>
+          </article>
+          {{/each}}
+          {{/if}}
+          <form action="/group/comment/{{group._id}}" method="post" class="mb-6">
+            <div class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200">
+              <label for="content" class="sr-only">Your comment</label>
+              <textarea id="content" name="content" rows="6"
+                class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none"
+                placeholder="Write a comment..." required></textarea>
+            </div>
+            <button type="submit"
+              class="btn btn-neutral">
+              Post comment
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
+
   </div>
+</div>
 </div>
