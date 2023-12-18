@@ -1,50 +1,53 @@
-<section class="canva">
-  <div class="box-glass container-form">
-    <h2>Create Group</h2>
-    <form
-      action="/group/creategroup"
-      method="post"
-      enctype="multipart/form-data"
-    >
-      <div class="input-box-white">
-        <input
-          required
-          type="text"
-          name="groupName"
-          placeholder="Group name"
-          maxlength="10"
-        />
-      </div>
-      <div class="input-box-white">
-        <input
-          type="text"
-          name="description"
-          placeholder="Description of the group"
-        />
+<div class="w-full flex flex-col items-center justify-center px-6 py-8 mx-auto">
+  <div class="w-full bg-white rounded-lg shadow  md:mt-0 sm:max-w-md xl:p-0 ">
+    <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+      <h1 class="text-xl font-bold leading-tight tracking-tight text-slate-900 md:text-2xl ">
+        Create a new Group
+      </h1>
+      <form action="/group/creategroup" method="POST" enctype="multipart/form-data" class="space-y-4 md:space-y-6">
+        {{!-- Group Name --}}
+        <div>
+          <label for="groupName" class="block mb-2 text-sm font-medium text-slate-900 ">Name of the Group</label>
+          <input type="text" name="groupName" id="groupName" required maxlength="10"
+            class="bg-slate-50 border border-slate-300 text-slate-900 sm:text-sm rounded-lg focus:ring-accent focus:border-accent block w-full p-2.5 ">
+        </div>
+
+        {{!-- Description of the Group --}}
+        <div>
+          <label for="description" class="block mb-2 text-sm font-medium text-slate-900 ">Describe your Group</label>
+          <input type="text" name="description" id="description"
+            class="bg-slate-50 border border-slate-300 text-slate-900 sm:text-sm rounded-lg focus:ring-accent focus:border-accent block w-full p-2.5 " />
+        </div>
 
         {{#if errorMessage}}
-          <p>{{errorMessage}}</p>
+        <p>{{errorMessage}}</p>
         {{/if}}
 
-      </div>
-      <div class="input-box-white">
-        <input
-          required
-          type="number"
-          name="price"
-          placeholder="Select a maximum price"
-        />
-      </div>
-      <div class="input-box-white">
-        <input
-          type="file"
-          name="groupImg"
-          placeholder="Select a maximum price"
-        />
-      </div>
-      <div>
-        <input class="btn-green" type="submit" value="Create Group" />
-      </div>
-    </form>
+        {{!-- Select a maximum price --}}
+        <div>
+          <label for="price" class="block mb-2 text-sm font-medium text-slate-900 ">Select a maximum price</label>
+          <input type="number" id="price" name="price" aria-describedby="helper-text-explanation"
+            class="bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 "
+            placeholder="10" required>
+        </div>
+
+        {{!-- Image for the group --}}
+        <div>
+          <label class="block mb-2 text-sm font-medium text-slate-900" for="groupImg">Upload a cover image</label>
+          <input aria-describedby="file_input_help" type="file" id="groupImg" name="groupImg"
+            class="block w-full text-sm text-slate-900 border border-slate-300 rounded-lg cursor-pointer bg-slate-50 focus:outline-none ">
+          <p class="mt-1 text-sm text-slate-500 " id="file_input_help">PNG or JPG.</p>
+        </div>
+
+        <button type="submit"
+          class="w-full  bg-primary hover:bg-accent focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center ">Save
+          changes</button>
+        {{#if errorMessage}}
+        {{errorMessage}}
+        {{/if}}
+
+      </form>
+    </div>
+
   </div>
-</section>
+</div>

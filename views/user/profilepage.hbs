@@ -1,57 +1,76 @@
-<div class="canva">
-  <div class="box-glass container-profile">
-    <img class="profileImg" src="{{user.profileImg}}" />
+<div class="relative w-full max-w-7xl flex flex-col items-center lg:flex-row gap-8">
+  {{!-- User Card --}}
+  <div class=" w-full lg:w-5/12 flex flex-col items-center justify-center px-6 py-8">
+    <div class="bg-white rounded-lg shadow">
+      <div class="flex flex-col max-w-md p-6 ">
+        <figure class="relative">
+          <img src="{{user.profileImg}}" alt="profile-img"
+            class="flex-shrink-0 object-cover h-64 rounded-sm sm:h-96  aspect-square">
 
-    <div class="nameProfile">
-      <h3 class="">{{user.username}}</h3>
+          <div class="absolute bottom-0 right-0 mr-2 mb-2 badge badge-accent text-xs"><a
+              href="/user/profile/edit/{{user._id}}">Edit Profile</a></div>
+        </figure>
 
-      <a href="/user/profile/edit/{{user._id}}">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          fill="currentColor"
-          class="bi bi-pencil-square edit-icon"
-          viewBox="0 0 16 16"
-        >
-          <path
-            d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
-          ></path>
-          <path
-            fill-rule="evenodd"
-            d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
-          ></path>
-        </svg>
-      </a>
+        <div>
+          <h2 class="text-xl font-semibold">{{user.username}}</h2>
+          <p>{{user.interests}}</p>
+        </div>
+        <button
+          class=" mt-4 bg-primary hover:bg-accent focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+          <a class="btn-link-white" href="/group/creategroup">Create group</a></button>
+      </div>
 
     </div>
-    <h5>{{user.interests}}</h5>
   </div>
-
-  <div class="box-glass container-groups-wrap">
-    {{#if usersInGroup}}
+  {{!-- Groups card --}}
+  <div class="w-full lg:w-7/12 lg:max-h-[500px] overflow-y-scroll">
+    <div class="flex flex-col items-center justify-center gap-8">
+      {{#if usersInGroup}}
       {{#each usersInGroup}}
-        <div class="box-glass-group" style="width: 10rem;">
-          <img
-            src="{{this.groupImg}}"
-            class="card-img-top"
-            alt="group_image"
-            style="width: 100%; border-radius: 10px;"
-          />
-          <div class="card-body">
-            <h3 class="text-center">
-              <a href="/group/group/{{_id}}"> {{this.groupName}} </a></h3>
+      <div class="card lg:card-side bg-base-100 shadow w-[90%]">
+        <figure><img class="object-cover w-full h-24 lg:h-full lg:w-48" src="{{this.groupImg}}" alt="Album" /></figure>
+        <div class="card-body">
+          <h2 class="card-title">{{this.groupName}}</h2>
+          <p>{{this.description}}</p>
+          <div class="card-actions ">
+            <button class="btn btn-outline btn-accent btn-sm ">
+            <a href="/group/group/{{_id}}">See Group</a>
+            </button>
           </div>
         </div>
+      </div>
       {{/each}}
-    {{else}}
+      {{else}}
 
       <p class="empty container-groups-wrap">You aren't in any group, yet.
       </p>
 
-    {{/if}}
-  </div>
+      {{/if}}
+      {{!-- <div>
+        {{#if usersInGroup}}
+        {{#each usersInGroup}}
+        <div class="box-glass-group" style="width: 10rem;">
+          <img src="{{this.groupImg}}" class="card-img-top" alt="group_image"
+            style="width: 100%; border-radius: 10px;" />
+          <div class="card-body">
+            <h3 class="text-center">
+              <a href="/group/group/{{_id}}"> {{this.groupName}} </a>
+            </h3>
+          </div>
+        </div>
+        {{/each}}
+        {{else}}
 
-  <button class="btn-green">
-    <a class="btn-link-white" href="/group/creategroup">Create group</a></button>
-</div>
+        <p class="empty container-groups-wrap">You aren't in any group, yet.
+        </p>
+
+        {{/if}}
+      </div> --}}
+      <div>
+
+      </div>
+
+
+
+    </div>
+  </div>

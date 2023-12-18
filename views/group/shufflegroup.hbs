@@ -1,27 +1,33 @@
-<section class="canva">
-  <div class="box-glass container-form">
-    <h2>Are you sure you want to shuffle {{groupShuffle.groupName}}?</h2>
+<div class="w-full flex flex-col items-center justify-center px-6 py-8 mx-auto">
+  <div class="w-full bg-white rounded-lg shadow  md:mt-0 sm:max-w-md ">
+    <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+      <h2 class="text-xl font-bold leading-tight tracking-tight text-slate-900 md:text-2xl text-center ">
+        Are you sure you want to shuffle {{groupShuffle.groupName}}?
+      </h2>
 
-    <a href="/group/group/{{groupShuffle._id}}"><button class="btn-green">
-        No</button></a>
-
-    <form action="/group/shuffle/{{groupShuffle._id}}" method="POST">
-      <button
-        type="submit"
-        class="btn-green"
-        type="submit"
-        style="background-color:gold"
-      >Yes</button>
-    </form>
+      <div class="flex gap-2 justify-center">
+        <form action="/group/shuffle/{{groupShuffle._id}}" method="POST">
+          <button type="submit" class="btn btn-outline btn-primary">Yes</button>
+        </form>
+        <a class="btn btn-error" href="/group/group/{{groupShuffle._id}}">No</a>
+      </div>
+      <div>
+        <div class="flex gap-4 flex-col">
+        <h3>Friends in {{groupShuffle.groupName}}:</h3>
+          {{#each groupShuffle.users}}
+          <div class="flex items-center gap-4">
+            <div class="avatar">
+              <div class="w-8 rounded-full">
+                <img src="{{this.profileImg}}" />
+              </div>
+            </div>
+            <h3>{{this.username}}</h3>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+    <div>
+    </div>
   </div>
-
-  <div class="box-glass container-form">
-
-    <h3>Friends in {{groupShuffle.groupName}}</h3>
-    <ul>
-      {{#each groupShuffle.users}}
-        <li>{{this.username}}</li>
-      {{/each}}
-    </ul>
-  </div>
-</section>
+</div>
