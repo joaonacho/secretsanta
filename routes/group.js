@@ -127,6 +127,10 @@ router.get("/add/:groupId", isGroupAdmin, (req, res) => {
 		});
 });
 
+router.get("/user-not-found", (req, res) => {
+	res.render("group/user-not-found");
+});
+
 //POST add friends
 router.post("/add/:groupId", (req, res, next) => {
 	const { groupId } = req.params;
@@ -141,19 +145,13 @@ router.post("/add/:groupId", (req, res, next) => {
 	//first try to find the user
 	User.findOne({ email })
 		.then((userFound) => {
+			console.log("userFound -->", userFound);
 			// if not found, create a new user
 			if (!userFound) {
-				return User.create({
-					username,
-					email,
-					password: "misteryFriend@2022",
-					groups: groupId,
-				}).then(() => {
-					console.log("user created");
-				});
+				console.log("no user found");
 			}
 			// if found and is not in the group, just update
-			if (userFound && group.includes(userFound._id) === false) {
+			else if (userFound && group.includes(userFound._id) === false) {
 				return User.findOneAndUpdate({ email }, { $push: { groups: groupId } }, { new: true }).then(() => {
 					console.log("user updated");
 				});
@@ -162,6 +160,10 @@ router.post("/add/:groupId", (req, res, next) => {
 		.finally(() => {
 			//after creating or update the user, catch his ID
 			User.findOne({ email }).then((user) => {
+				if (!user) {
+					res.redirect(`/group/user-not-found`);
+					return;
+				}
 				//Search for the group and push the user ID to the users Array
 				//if the user is not in the group
 				if (group.includes(user.id) === false) {

@@ -16,72 +16,65 @@ const { populate } = require("../models/User.model");
 
 //GET profile page
 router.get("/profile/:userId", isLoggedIn, (req, res, next) => {
-  const { userId } = req.params;
+	const { userId } = req.params;
 
-  User.findById(userId)
-    .populate("groups")
-    .then((usersInGroup) => {
-      if (!usersInGroup) {
-        res.render("user/profilepage", {
-          user: req.session.user,
-        });
-      } else {
-        res.render("user/profilepage", {
-          user: req.session.user,
-          usersInGroup: usersInGroup.groups,
-        });
-      }
-    });
+	User.findById(userId)
+		.populate("groups")
+		.then((usersInGroup) => {
+			// console.log("usersInGroup -->", usersInGroup);
+			if (!usersInGroup) {
+				res.render("user/profilepage", {
+					user: req.session.user,
+				});
+			} else {
+				res.render("user/profilepage", {
+					user: req.session.user,
+					usersInGroup: usersInGroup.groups,
+				});
+			}
+		});
 });
 
 //GET Edit profile
 router.get("/profile/edit/:id", (req, res, next) => {
-  const { id } = req.params;
-  User.findById(id).then((updateUser) => {
-    res.render("user/editprofile", { user: updateUser });
-  });
+	const { id } = req.params;
+	User.findById(id).then((updateUser) => {
+		res.render("user/editprofile", { user: updateUser });
+	});
 });
 
 //POST Edit profile
-router.post(
-  "/profile/edit/:id",
-  fileUploader.single("profileImg"),
-  (req, res, next) => {
-    const { id } = req.params;
+router.post("/profile/edit/:id", fileUploader.single("profileImg"), (req, res, next) => {
+	const { id } = req.params;
 
-    const { username, interests, existingImage } = req.body;
+	const { username, interests, existingImage } = req.body;
 
-    let profileImg;
-    if (req.file) {
-      profileImg = req.file.path;
-    } else {
-      profileImg = existingImage;
-    }
+	let profileImg;
+	if (req.file) {
+		profileImg = req.file.path;
+	} else {
+		profileImg = existingImage;
+	}
 
-    User.findByIdAndUpdate(
-      id,
-      { username, interests, profileImg },
-      { new: true }
-    )
-      .then((updatedUser) => {
-        req.session.user = updatedUser;
-        res.redirect(`/user/profile/${id}`);
-      })
-      .catch((error) => {
-        next(error);
-      });
-  }
-);
+	User.findByIdAndUpdate(id, { username, interests, profileImg }, { new: true })
+		.then((updatedUser) => {
+			req.session.user = updatedUser;
+			res.redirect(`/user/profile/${id}`);
+		})
+		.catch((error) => {
+			next(error);
+		});
+});
 
 //GET view profile
 router.get("/view/profile/:userId", (req, res) => {
-  const { userId } = req.params;
+	const { userId } = req.params;
 
-  User.findById(userId)
-    .populate("groups")
-    .then((userFound) => {
-      res.render("user/viewprofile", { userFound });
-    });
+	User.findById(userId)
+		.populate("groups")
+		.then((userFound) => {
+			res.render("user/viewprofile", { userFound });
+		});
 });
 
 module.exports = router;
