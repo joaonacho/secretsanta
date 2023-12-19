@@ -127,6 +127,7 @@ router.get("/add/:groupId", isGroupAdmin, (req, res) => {
 		});
 });
 
+//GET user not found
 router.get("/user-not-found", (req, res) => {
 	res.render("group/user-not-found");
 });
@@ -134,45 +135,41 @@ router.get("/user-not-found", (req, res) => {
 //POST add friends
 router.post("/add/:groupId", (req, res, next) => {
 	const { groupId } = req.params;
-	const username = req.body.users;
 	const email = req.body.email;
 	let group;
 
 	Group.findById(groupId).then((groupFound) => {
 		group = groupFound.users;
 	});
-
 	//first try to find the user
 	User.findOne({ email })
 		.then((userFound) => {
-			console.log("userFound -->", userFound);
-			// if not found, create a new user
 			if (!userFound) {
 				console.log("no user found");
-			}
-			// if found and is not in the group, just update
-			else if (userFound && group.includes(userFound._id) === false) {
+			} else if (userFound && group.includes(userFound._id) === true) {
+				console.log("user is already in the group");
+				return;
+			} else if (userFound && group.includes(userFound._id) === false) {
 				return User.findOneAndUpdate({ email }, { $push: { groups: groupId } }, { new: true }).then(() => {
 					console.log("user updated");
 				});
 			}
 		})
 		.finally(() => {
-			//after creating or update the user, catch his ID
 			User.findOne({ email }).then((user) => {
 				if (!user) {
 					res.redirect(`/group/user-not-found`);
 					return;
-				}
-				//Search for the group and push the user ID to the users Array
-				//if the user is not in the group
-				if (group.includes(user.id) === false) {
+				} else if (user && group.includes(user._id) === true) {
+					res.redirect(`/group/user-not-found`);
+					return;
+				} else if (group.includes(user.id) === false) {
 					return Group.findByIdAndUpdate(groupId, { $push: { users: user.id } }, { new: true }).then(() => {
 						res.redirect(`/group/add/${groupId}`);
 					});
 				}
 
-				return res.redirect(`/group/add/${groupId}`);
+				// return res.redirect(`/group/add/${groupId}`);
 			});
 		})
 		.catch((error) => {
