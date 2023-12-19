@@ -2,9 +2,6 @@
 // https://www.npmjs.com/package/dotenv
 require("dotenv/config");
 
-// ℹ️ Connects to the database
-require("./db");
-
 // Handles http requests (express is node js framework)
 // https://www.npmjs.com/package/express
 const express = require("express");
@@ -19,19 +16,18 @@ const app = express();
 require("./config")(app);
 
 const projectName = "secretsanta";
-const capitalized = (string) =>
-  string[0].toUpperCase() + string.slice(1).toLowerCase();
+const capitalized = (string) => string[0].toUpperCase() + string.slice(1).toLowerCase();
 
 app.locals.title = `${capitalized(projectName)} created with IronLauncher`;
 
 app.use((req, res, next) => {
-  res.locals.userIsConnected = req.session.user ? true : false;
-  if (res.locals.userIsConnected) {
-    res.locals.username = req.session.user.username;
-    res.locals.profileImg = req.session.user.profileImg;
-    res.locals._id = req.session.user._id;
-  }
-  next();
+	res.locals.userIsConnected = req.session.user ? true : false;
+	if (res.locals.userIsConnected) {
+		res.locals.username = req.session.user.username;
+		res.locals.profileImg = req.session.user.profileImg;
+		res.locals._id = req.session.user._id;
+	}
+	next();
 });
 
 // 👇 Start handling routes here
@@ -48,7 +44,6 @@ app.use("/group", groupRoutes);
 
 //user routes here
 const userRoutes = require("./routes/user");
-const res = require("express/lib/response");
 app.use("/user", userRoutes);
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes

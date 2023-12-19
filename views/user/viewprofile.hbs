@@ -1,4 +1,4 @@
-<div class="canva">
+{{!-- <div class="canva">
   <div class="box-glass container-profile">
     <img class="profileImg" src="{{userFound.profileImg}}" />
 
@@ -24,5 +24,26 @@
         </div>
       </div>
     {{/each}}
+  </div>
+</div> --}}
+
+
+<div class="relative w-full max-w-7xl flex flex-col items-center lg:flex-row gap-8">
+  {{!-- User Card --}}
+  <div class=" w-full lg:w-5/12 flex flex-col items-center justify-center px-6 py-8">
+    <div class="bg-white rounded-lg shadow">
+      <div class="flex flex-col max-w-md p-6 ">
+        <figure class="relative">
+          <img src="{{userFound.profileImg}}" alt="profile-img"
+            class="flex-shrink-0 object-cover h-64 rounded-sm sm:h-96  aspect-square">
+        </figure>
+
+        <div>
+          <h2 class="text-xl font-semibold">{{userFound.username}}</h2>
+          <p>{{userFound.interests}}</p>
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>

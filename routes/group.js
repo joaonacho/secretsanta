@@ -281,12 +281,32 @@ router.post("/sendemail/:groupId", (req, res, next) => {
 
 			const message = `Your webstie`;
 
-			let transporter = nodemailer.createTransport({
-				service: "Gmail",
+			// let transporter = nodemailer.createTransport({
+			// 	service: "Gmail",
+			// 	auth: {
+			// 		user: "webstie@andregregorio.pt",
+			// 		pass: "Web.Bestie2022",
+			// 	},
+			// });
+			const transporter = nodemailer.createTransport({
+				host: "smtp.gmail.com",
+				port: 465,
+				secure: true,
 				auth: {
-					user: "webstie@andregregorio.pt",
-					pass: "Web.Bestie2022",
+					type: "OAuth2", //the type of auth we're using
+					user: "webstie.2022@gmail.com",
+					clientId: process.env.GOOGLE_CLIENT_ID,
+					clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+					refreshToken: process.env.GOOGLE_REFRESH_TOKEN,
 				},
+			});
+
+			transporter.verify((error, success) => {
+				if (error) {
+					console.log(error);
+				} else {
+					console.log("Nodemailer Server is ready to take messages");
+				}
 			});
 
 			uniqueEmail.forEach((email, index) => {
@@ -303,6 +323,7 @@ router.post("/sendemail/:groupId", (req, res, next) => {
           <p>You can check your webstie's interests by clicking in his/her name in the group page.
           `,
 				});
+				console.log("message sent");
 			});
 		});
 
